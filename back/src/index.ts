@@ -1,9 +1,9 @@
-import { AppDataSource } from './configs/database.config';
+import { typeorm } from './configs/database.config';
 import { PORT } from './configs/envs.config';
 import server from './server';
 import 'reflect-metadata';
 
-AppDataSource.initialize()
+typeorm.initialize()
   .then((): void => {
     console.log('connection sucessfull.');
     server.listen(PORT, () =>
