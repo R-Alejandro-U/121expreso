@@ -37,3 +37,4 @@ export const dbConfig = {
   entities: DB_ENTITIES,
   dropSchema: DB_DROPSCHEMA,
 };
+export const SALT: number = data["SALT"] ? parseInt(data["SALT"], 10) : 10;
