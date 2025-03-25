@@ -1,0 +1,46 @@
+{
+  "name": "back_121",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/R-Alejandro-U/121expreso.git"
+  },
+  "author": "Alejandro Urdaneta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/R-Alejandro-U/121expreso/issues"
+  },
+  "homepage": "https://github.com/R-Alejandro-U/121expreso#readme",
+  "description": "",
+  "devDependencies": {
+    "@eslint/create-config": "^1.5.0",
+    "@eslint/js": "^9.22.0",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^22.13.9",
+    "@typescript-eslint/eslint-plugin": "^8.26.0",
+    "@typescript-eslint/parser": "^8.26.0",
+    "cors": "^2.8.5",
+    "eslint": "^9.22.0",
+    "express": "^4.21.2",
+    "globals": "^16.0.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.26.1"
+  },
+  "dependencies": {
+    "axios": "^1.8.2",
+    "dotenv": "^16.4.7",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.14.2",
+    "mongoose": "^8.12.1"
+  }
+}
