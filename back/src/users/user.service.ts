@@ -42,7 +42,7 @@ export const userService = {
             const max_pages: number = Math.ceil(total_items / limit);
             const current_page: number = Math.min(Math.max(1, page), max_pages);
             const init: number = (current_page - 1) * limit; // Corrección: quitamos el "-" por "*"
-            const end: number = Math.min(current_page * limit, total_items);
+            const end: number = Math.min(current_page * Math.max(1, limit), total_items);
             const partialUser: UserDTO[] = users
                 .slice(init, end)
                 .map((user: User) => {
