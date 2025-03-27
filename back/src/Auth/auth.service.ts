@@ -14,12 +14,26 @@ const hashPassword = async (password: string): Promise<string> => {
         throw new Error(`Hubo un error en el hasheo de la contraseña. Error: ${err}`);            
     };
 };
-
+const existUser = async (user: Partial<User>): Promise<string | null> => {
+    try {
+        const exist: User | null = await userModel.findOneBy({email: user.email});
+        if(!exist || !exist.isDeleted) return null;
+        await userModel.update(exist.id, {...user, isDeleted: false});
+        return 'Te has registrado con éxito.';
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+        console.log('holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+        
+        throw new Error('Hubo un error al registrar al usuario: ' + (error['detail'] || error['message'] || 'Error desconocido.'));
+    };
+};
 export const authService = {
     register: async (user: Omit<UserRegisterDTO, 'passwordConfirmation'>): Promise<string> => {
         try {
             const password: string = await hashPassword(user.password);
-            await userModel.save({ ...user, password, isDeleted: false});
+            const exist: string | null = await existUser({...user, password});
+            if(exist) return exist;
+            await userModel.save({ ...user, password});
             return 'Te has registrado con éxito.';
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
@@ -39,5 +53,5 @@ export const authService = {
             const err: string = error instanceof Error ? error.message : 'Hubo un error desconocido.';
             throw err;
         };
-    },
+    }, 
 };

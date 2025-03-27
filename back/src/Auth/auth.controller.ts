@@ -19,7 +19,7 @@ export const authController = {
             const response: string = await authService.register(user);
             res.status(201).json({message: response, status: 201}); 
         } catch (error) {
-            res.status(409).json({error, status: 401});
+            res.status(409).json({error, status: 409});
         };
     },
     login: async (req: Request, res: Response): Promise<void> => {
@@ -32,5 +32,5 @@ export const authController = {
         } catch (error) {
             res.status(400).json(error);
         };
-    } 
+    },
 }
