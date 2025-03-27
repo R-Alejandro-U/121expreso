@@ -9,7 +9,7 @@ const loadRoutes = async (): Promise<void> => {
   try {
     const files: string[] = await fs.readdir(__dirname);
     for (const file of files) {
-      if (file !== 'index.js' && file !== 'indes.ts') {
+      if (file !== 'index.js' && file !== 'index.ts') {
         try {
           const name: string = removeExtension(file) ?? '';
           const path = await import(join(__dirname, file));
