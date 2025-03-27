@@ -12,18 +12,13 @@ const DB_USERNAME: string | undefined = data['DB_USERNAME'];
 const DB_PASSWORD: string | undefined = data['DB_PASSWORD'];
 const DB_NAME: string | undefined = data['DB_NAME'];
 const DB_SYNCHRONIZE: boolean | undefined = data['DB_SYNCHRONIZE']
-  ? data['DB_SYNCHRONIZE'] === 'true'
+  ? data['DB_SYNCHRONIZE'] == 'true'
   : true;
 const DB_LOGGING: boolean | undefined = data['DB_LOGGING']
-  ? data['DB_LOGGING'] === 'true'
+  ? data['DB_LOGGING'] == "true"
   : true;
-const DB_ENTITIES: string[] | undefined = data['DB_ENTITIES']
-  ? !data['DB_ENTITIES'].includes(', .')
-    ? data['DB_ENTITIES'].split(',').map((path) => path.trim())
-    : [data['DB_ENTITIES'].trim()]
-  : ['./dist/**/*.entity{.ts, .js}'];
-const DB_DROPSCHEMA: boolean | undefined = data['DB_DROP_SCHEMA']
-  ? data['DB_DROP_SCHEMA'] === 'true'
+const DB_DROPSCHEMA: boolean | undefined = data['DB_DROPSCHEMA']
+  ? data['DB_DROPSCHEMA'] === 'true'
   : false;
 export const dbConfig = {
   type: DB_TYPE,
@@ -34,7 +29,7 @@ export const dbConfig = {
   database: DB_NAME,
   synchronize: DB_SYNCHRONIZE,
   logging: DB_LOGGING,
-  entities: DB_ENTITIES,
   dropSchema: DB_DROPSCHEMA,
 };
 export const SALT: number = data["SALT"] ? parseInt(data["SALT"], 10) : 10;
+export const SECRET_WORD: string = data['SECRET_WORD'] ? data['SECRET_WORD'] : "";
