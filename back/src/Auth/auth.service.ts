@@ -47,7 +47,7 @@ export const authService = {
             if (!user || !(await bcrypt.compare(password, user.password))) throw new Error('Contraseña o email incorrectos.');
             if(user.isDeleted) throw new Error('Contraseña o email incorrectos.'); 
             const { id, name, isAdmin } = user;
-            const token: string = Jwt.sign({ id, name }, SECRET_WORD, { expiresIn: '1d' });
+            const token: string = Jwt.sign({ id, name, sub: id }, SECRET_WORD, { expiresIn: '1d' });
             return { user: { id, name, isAdmin }, token };
         } catch (error) {
             const err: string = error instanceof Error ? error.message : 'Hubo un error desconocido.';
