@@ -1,5 +1,5 @@
 import { Comment } from "../comments/Comment.entity";
-import { IPages } from "../utils/pages.dto";
+import { IPages } from "../utils/globalDTOs/pages.dto";
 
 export class UserDTO {
     id!: string;
