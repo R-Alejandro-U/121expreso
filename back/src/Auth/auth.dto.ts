@@ -45,10 +45,13 @@ export class UserLoginDTO {
 };
 
 export class Payload {
+    sub!: string;
     id!: string;
     name!: string;
     isAdmin!: boolean;
     isDeleted!: boolean;
+    exp!: any;
+    iat!: any;
 };
 
 interface IUser {
