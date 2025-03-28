@@ -4,7 +4,7 @@ import axios from "axios";
 import { commentModel } from "../configs/database.config"
 import { UserDTO } from "../users/User.DTO";
 import { userService } from "../users/user.service";
-import { CommentDTO, GetCommentsResponse, NewCommentDTO } from "./comment.dto";
+import { CommentDTO, GetCommentsResponse, IPerspectiveResponse, NewCommentDTO } from "./comment.dto";
 import { Comment } from "./Comment.entity"
 import { API_KEY } from "../configs/envs.config";
 
@@ -49,12 +49,12 @@ export const commentService = {
     newComment: async (userId: string, { comment }: NewCommentDTO): Promise<string> => {
         try {
             const user: UserDTO = await userService.getUserById(userId);
-            const { data }: { data: number } = await axios.post(API_KEY, {
+            const { data } = await axios.post<IPerspectiveResponse>(API_KEY, {
                 comment: { text: comment },
                 languages: ['es', 'en'],
                 requestedAttributes: { TOXICITY: {} },
             });
-            if (data >= 0.7) throw new Error('Este comentario es muy ofensivo y no será guardado.');
+            if (data.attributeScores.TOXICITY.summaryScore.value >= 0.7) throw new Error('Este comentario es muy ofensivo y no será guardado.');
             await commentModel.save({ comment, user });
             return `Se ha guardado con éxito el comentario. Gracias por participar ${user.name}.`;
         } catch (error) {

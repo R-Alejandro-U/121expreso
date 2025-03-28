@@ -19,3 +19,13 @@ export class NewCommentDTO {
     @Length(4, 500, {message: 'El minimo de caracteres es de 4 y unmaximode 500.'})
     comment!: string;
 }
+
+export interface IPerspectiveResponse {
+    attributeScores: {
+        TOXICITY: {
+            summaryScore: {
+                value: number;
+            };
+        };
+    };
+}
