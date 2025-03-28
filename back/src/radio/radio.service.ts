@@ -6,7 +6,7 @@ export const RadioService = {
     try {
       if (!CONECTION_STREAM)
         throw new Error('Falta la url de conexión para el stream.');
-      const { data }: {data: Readable} = await axios(CONECTION_STREAM, {
+      const { data } = await axios<Readable>(CONECTION_STREAM, {
         responseType: 'stream',
       });
       return data;
