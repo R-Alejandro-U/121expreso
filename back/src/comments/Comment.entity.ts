@@ -8,11 +8,11 @@ export class Comment {
     id!: string;
     @Column({type: 'varchar', length: 500, nullable: false})
     @Min(4, {message: 'El mínimo es de 4 caracteres'})
-    content!: string;
+    comment!: string;
     @CreateDateColumn()
     CreateComment?: Date;
     @UpdateDateColumn()
     UpDateComment?: Date;
-    @ManyToOne(() => User, (user) => user.comments)
+    @ManyToOne(() => User, (user) => user.comments, {cascade: false})
     user!: User;
 };

@@ -16,3 +16,4 @@ export const typeorm: DataSource = new DataSource({
   entities: [User, Comment],
 });
 export const userModel = typeorm.getRepository(User);
+export const commentModel = typeorm.getRepository(Comment);

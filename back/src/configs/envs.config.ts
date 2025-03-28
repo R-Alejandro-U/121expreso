@@ -32,4 +32,5 @@ export const dbConfig = {
   dropSchema: DB_DROPSCHEMA,
 };
 export const SALT: number = data["SALT"] ? parseInt(data["SALT"], 10) : 10;
-export const SECRET_WORD: string = data['SECRET_WORD'] ? data['SECRET_WORD'] : "";
+export const SECRET_WORD: string = data['SECRET_WORD'] ?? "";
+export const API_KEY: string = data["API_KEY"] ?? '';

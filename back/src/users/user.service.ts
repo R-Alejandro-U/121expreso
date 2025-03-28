@@ -36,15 +36,14 @@ export const userService = {
     },
     getAllUsers: async (page: number, limit: number): Promise<GetUsersResponse> => {
         try {
-            const users: User[] = await userModel.find({ relations: ["comments"] });
-            if (!users.length) throw new Error('No hay usuarios registrados.');
-            const total_items: number = users.length;
-            const max_pages: number = Math.ceil(total_items / limit);
-            const current_page: number = Math.min(Math.max(1, page), max_pages);
-            const init: number = (current_page - 1) * limit; // Corrección: quitamos el "-" por "*"
-            const end: number = Math.min(current_page * Math.max(1, limit), total_items);
+            const [users, total_items] : [User[], number] = await userModel.findAndCount({ 
+                relations: ["user"], 
+                skip: (page -1) * limit,
+                take: limit
+            });
+            if (!users.length && total_items === 0) throw new Error('No hay usuarios registrados.');
+            const max_pages: number = Math.ceil(total_items / limit)
             const partialUser: UserDTO[] = users
-                .slice(init, end)
                 .map((user: User) => {
                     const { password, ...partialUser } = user;
                     return partialUser;
@@ -54,8 +53,8 @@ export const userService = {
                 pagination_info: {
                     total_items,
                     max_pages,
-                    page: current_page,
-                    current_users: partialUser.length
+                    page,
+                    current_items: partialUser.length
                 }
             };
         } catch (error) {
@@ -65,11 +64,9 @@ export const userService = {
     deleteUser: async (id: string): Promise<string> => {
         try {
             const user: UserDTO = await userService.getUserById(id);
-            console.log('user', user)
             await userModel.update(user.id, { isDeleted: true });
             return `El usuario se ha eliminado correctamente.`;
         } catch (error) {
-            console.log(error);
             throw error; 
         };
     }

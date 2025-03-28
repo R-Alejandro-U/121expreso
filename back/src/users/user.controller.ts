@@ -44,7 +44,7 @@ export const userController = {
             let limit: any = req.query['limit'];
             if (!page || isNaN(parseInt(page, 10))) page = 1;
             if (!limit || isNaN(parseInt(limit, 10))) limit = 10;
-            res.status(200).json({ data: await userService.getAllUsers(page, limit) });
+            res.status(200).json({ data: await userService.getAllUsers(+page, +limit) });
         } catch (error) {
             const err: string = error instanceof Error ? error.message : 'Error desconocido.'
             res.status(404).json({ error: 'Sin información', message: err });
