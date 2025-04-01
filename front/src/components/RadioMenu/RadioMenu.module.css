@@ -1,0 +1,178 @@
+/* RadioMenu.module.css */
+:root {
+  --menu-bg: rgba(30, 30, 30, 0.5); /* Fondo gris oscuro con opacidad cuando está colapsado */
+  --menu-bg-expanded: rgba(30, 30, 30, 0.9); /* Fondo más opaco cuando está expandido */
+  --menu-hover: rgba(255, 0, 0, 0.3);
+  --menu-active: rgba(255, 0, 0, 0.5);
+  --text-color: #ffffff;
+  --icon-color: #ffffff;
+  --primary-color: #ff0000;
+}
+
+/* Contenedor principal */
+.radio-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 900;
+  display: flex;
+}
+
+/* Botón para expandir/contraer */
+.menu-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1001;
+  transition: background-color 0.3s ease, left 0.3s ease;
+}
+
+.menu-toggle:hover {
+  background-color: #e60000;
+}
+
+.menu-container.expanded + .menu-toggle {
+  left: 180px;
+}
+
+/* Contenedor del menú */
+.menu-container {
+  background: var(--menu-bg);
+  height: 100%;
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.menu-container.expanded {
+  width: 200px;
+  background: var(--menu-bg-expanded);
+  align-items: flex-start;
+}
+
+/* Ítems del menú */
+.menu-item-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 10px 15px;
+  margin: 15px 0;
+  width: 100%;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.menu-item:hover {
+  background-color: var(--menu-hover);
+  transform: scale(1.05);
+}
+
+.menu-item.active {
+  background-color: var(--menu-active);
+  border-radius: 10px;
+  transform: scale(1.05);
+}
+
+.menu-item.active:nth-child(1) .menu-icon {
+  background-color: #4dd2f5;
+}
+.menu-item.active:nth-child(2) .menu-icon {
+  background-color: #a77df7;
+}
+.menu-item.active:nth-child(3) .menu-icon {
+  background-color: #ffd633;
+}
+.menu-item.active:nth-child(4) .menu-icon {
+  background-color: #ff6666;
+}
+.menu-item.active:nth-child(5) .menu-icon {
+  background-color: #33ff33;
+}
+
+.menu-icon {
+  min-width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  border-radius: 50%;
+  background-color: #3a3a3a;
+  transition: background-color 0.2s ease;
+}
+
+.menu-item:nth-child(1) .menu-icon {
+  background-color: #00b7eb;
+}
+.menu-item:nth-child(2) .menu-icon {
+  background-color: #8a4af3;
+}
+.menu-item:nth-child(3) .menu-icon {
+  background-color: #ffcc00;
+}
+.menu-item:nth-child(4) .menu-icon {
+  background-color: #ff4d4d;
+}
+.menu-item:nth-child(5) .menu-icon {
+  background-color: #00cc00;
+}
+
+.menu-text {
+  margin-left: 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Versión móvil */
+.radio-menu.mobile {
+  top: 0;
+  width: 100%;
+  height: 60px;
+}
+
+.radio-menu.mobile .menu-container {
+  width: 100% !important;
+  height: 60px;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 0;
+  align-items: center;
+}
+
+.radio-menu.mobile .menu-item {
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px 0;
+  margin: 0;
+  flex: 1;
+}
+
+.radio-menu.mobile .menu-text {
+  margin-left: 0;
+  margin-top: 5px;
+  font-size: 0.7rem;
+}

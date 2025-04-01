@@ -1,35 +1,123 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useContext, useEffect, useState } from 'react';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import Home from './views/Home/Home';
+import { UserContext } from './context/UserContext';
+import './App.css';
+import Conocenos from './views/Conocenos/Conocenos';
+import Contacto from './views/Contacto/Contacto';
+import Donaciones from './views/Donaciones/Donaciones';
+import Login from './views/Login/Login';
+import Registro from './views/Registro/Registro';
+import RadioMenu from './components/RadioMenu/RadioMenu';
+import Reseñas from './views/Reseñas/Reseñas';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+  const { user } = useContext(UserContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [menuExpanded, setMenuExpanded] = useState(false);
+
+  const protectedRoutes = ['/perfil'];
+  const routesWithMenu = ['/', '/conocenos', '/donaciones', '/reseñas', '/contacto'];
+
+  useEffect(() => {
+    if (menuExpanded) {
+      document.body.classList.add('menu-expanded');
+    } else {
+      document.body.classList.remove('menu-expanded');
+    }
+  }, [menuExpanded]);
+
+  useEffect(() => {
+    const isAttemptingProtectedRoute = protectedRoutes.some((route) =>
+      location.pathname.startsWith(route)
+    );
+
+    if (!user && isAttemptingProtectedRoute) {
+      navigate('/login');
+    } else if (user && ['/login', '/register'].includes(location.pathname)) {
+      navigate('/');
+    }
+  }, [location.pathname, navigate, user]);
+
+  const shouldShowMenu = routesWithMenu.some((route) =>
+    location.pathname.startsWith(route)
+  );
+
+  const handleMenuToggle = (expanded: boolean) => {
+    setMenuExpanded(expanded);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className={`radio-app ${menuExpanded ? 'menu-expanded' : ''}`}>
+      {shouldShowMenu && (
+        <header className="app-header">
+          <div className="logo">
+            <img src="/logo.png" alt="121 Expreso" className="logo-image" />
+          </div>
+          <div className="header-actions">
+            <div className="search-icon">🔍</div>
+            {user ? (
+              <div className="user-icon">👤</div>
+            ) : (
+              <button
+                className="login-button"
+                onClick={() => navigate('/login')}
+              >
+                Iniciar Sesión
+              </button>
+            )}
+            <button className="live-radio-button">
+              RADIO EN VIVO
+              <div className="wave-icon">
+                <svg viewBox="0 0 24 8" width="24" height="8">
+                  <path
+                    d="M0,4 C2,0 4,8 6,4 C8,0 10,8 12,4 C14,0 16,8 18,4 C20,0 22,8 24,4"
+                    stroke="#ffffff"
+                    strokeWidth="1.5"
+                    fill="none"
+                  />
+                </svg>
+              </div>
+            </button>
+          </div>
+        </header>
+      )}
 
-export default App
+      <main className="app-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/conocenos" element={<Conocenos />} />
+          <Route path="/contacto" element={<Contacto />} />
+          <Route path="/donaciones" element={<Donaciones />} />
+          <Route path="/reseñas" element={<Reseñas />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/registro" element={<Registro />} />
+          {user && <></>}
+        </Routes>
+      </main>
+
+      {shouldShowMenu && <RadioMenu onMenuToggle={handleMenuToggle} />}
+
+      {shouldShowMenu && (
+        <footer className="app-footer">
+          <div className="footer-left">
+            <img src="/logo.png" alt="121 Expreso" className="logo-image" />
+            <span>#121EXPRESO</span>
+          </div>
+          <div className="footer-right">
+            <button className="live-button">
+              EN VIVO
+              <span role="img" aria-label="play">▶️</span>
+            </button>
+            <div className="social-icon">📘</div>
+            <div className="social-icon">📷</div>
+            <div className="social-icon">🐦</div>
+          </div>
+        </footer>
+      )}
+    </div>
+  );
+};
+
+export default App;
