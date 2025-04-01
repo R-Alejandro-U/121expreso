@@ -1,10 +1,18 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React from 'react';
+import ReactDOM, { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import { UserProvider } from './context/UserContext';
+import App from './App';
+import './index.css';
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+  <React.StrictMode>
+    <BrowserRouter>
+      <UserProvider>
+        <App />
+      </UserProvider>
+    </BrowserRouter>
+  </React.StrictMode>
+);
+
