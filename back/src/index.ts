@@ -11,10 +11,8 @@ typeorm.initialize()
     );
   })
   .catch((err): void => {
+    console.log(err);
     throw new Error(
       `Error connecting to the database: ${err['message'] ?? err}`,
     );
-  })
-  .finally((): void => {
-    console.log('The server is on.');
   });

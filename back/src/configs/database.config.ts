@@ -2,7 +2,6 @@ import { DataSource } from 'typeorm';
 import { dbConfig } from './envs.config';
 import { User } from '../users/User.entity';
 import { Comment } from '../comments/Comment.entity';
-
 export const typeorm: DataSource = new DataSource({
   type: dbConfig.type,
   host: dbConfig.host,
