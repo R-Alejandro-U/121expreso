@@ -50,7 +50,7 @@ export const commentController = {
             res.status(201).json({ message: await commentService.newComment(id, body)});
         } catch (error) {
             const err: string = error instanceof Error ? error.message : 'Error desconocido.'
-            res.status(404).json({ error: 'Sin información', message: err });
+            res.status(404).json({ error: 'Falta de respeto.', message: err, extra: 'Te estoy vigilando, ese comentario es innecesario.' });
         };
     },
 }
