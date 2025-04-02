@@ -27,4 +27,4 @@ jobs:
           context: ./back
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/active-center-db:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/121Expreso:latest
