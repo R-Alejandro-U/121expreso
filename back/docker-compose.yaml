@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  expressApp:
+    build: ./
+    ports:
+      - "3000:3001"  
+    env_file:
+      - .env       
+    depends_on:
+      - mysqldb     
+
+  mysqldb:
+    image: mysql:latest  
+    volumes:
+      - mysql_data:/var/lib/mysql 
+    env_file:
+      - .env        
+    ports:
+      - "3306:3306" 
+
+volumes:
+  mysql_data: 

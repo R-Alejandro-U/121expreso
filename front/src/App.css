@@ -1,0 +1,145 @@
+/* App.css */
+
+/* Contenedor principal */
+.radio-app {
+  min-height: 100vh;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Contenido principal */
+.app-content {
+  padding-left: 60px;
+  padding-bottom: 60px;
+  transition: padding-left 0.3s ease;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.radio-app.menu-expanded .app-content {
+  padding-left: 200px;
+}
+
+/* Footer */
+.app-footer {
+  background-color: rgba(64, 88, 109, 0.9);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 911; /* Alto en escritorio */
+  box-sizing: border-box;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Estilos de botones e íconos en el footer */
+.login-button {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  padding: 5px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.live-radio-button,
+.live-button {
+  background-color: #ff0000;
+  color: #ffffff;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.live-radio-button:hover,
+.live-button:hover {
+  background-color: #e60000;
+}
+
+.wave-icon {
+  display: inline-block;
+}
+
+.search-icon,
+.user-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.social-icon {
+  width: 30px;
+  height: 30px;
+  background-color: #3a3a3a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: #555555;
+}
+
+/* Media queries para modo móvil */
+@media (max-width: 768px) {
+  .app-content {
+    padding-left: 0;
+    padding-top: 0;
+    padding-bottom: 120px; /* Espacio para el footer (60px) + RadioMenu (60px) */
+  }
+
+  .radio-app.menu-expanded .app-content {
+    padding-left: 0;
+  }
+
+  /* Ajustamos la posición y z-index del footer en modo móvil */
+  .app-footer {
+    bottom: 60px; /* Justo por encima del RadioMenu (60px) */
+    z-index: 800; /* Menor que el RadioMenu en móvil (850) */
+  }
+}
+
+/* Estilos adicionales (si los necesitas) */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: start;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
