@@ -33,6 +33,6 @@ export const authorization = (req: Request, res: Response, next: NextFunction): 
         };
         next();
     } catch (error: any) {
-        res.status(401).json({error: error['message'] ?? error, message: `Tu token expiro. Inicia sesión otra vez.`})
+        res.status(498).json({error: error['message'] ?? error, message: `Tu token expiro. Inicia sesión otra vez.`})
     };
 };
