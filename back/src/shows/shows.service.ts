@@ -8,7 +8,7 @@ export const showsService = {
         try {
             const { data } = await axios('https://api.mixcloud.com/121expreso/cloudcasts/');
             if(!data['data'].length) throw new Error('Sin shows previos.');
-            return data['data'].map((show: any) => ({name: show.name, url: show.url, image: show['pictures']['640wx640h'], duration: show['audio_length']}));
+            return data['data'].map((show: any) => ({name: show.name, url: show.url, image: show['pictures']['640wx640h'], duration: Number((show['audio_length'] / 3600).toFixed(2))}));
         } catch (error) {
             throw error;
         };
