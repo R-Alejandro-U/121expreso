@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import styles from './RadioMenu.module.css';
+import { FaDonate, FaHome, FaPhone, FaStar, FaUsers } from 'react-icons/fa';
 
 interface RadioMenuProps {
   onMenuToggle?: (expanded: boolean) => void;
@@ -40,20 +41,20 @@ const RadioMenu: React.FC<RadioMenuProps> = ({ onMenuToggle }) => {
   };
 
   const menuItems = [
-    { id: 1, path: '/', title: 'INICIO', icon: '🏠' },
-    { id: 2, path: '/conocenos', title: 'CONOCENOS', icon: '👥' },
-    { id: 3, path: '/donaciones', title: 'DONACIONES', icon: '💰' },
-    { id: 4, path: '/reseñas', title: 'RESEÑAS', icon: '⭐' },
-    { id: 5, path: '/contacto', title: 'CONTACTO', icon: '📞' },
+    { id: 1, path: '/', title: 'INICIO', icon: <FaHome /> },
+    { id: 2, path: '/conocenos', title: 'CONOCENOS', icon: <FaUsers /> },
+    { id: 3, path: '/donaciones', title: 'DONACIONES', icon: <FaDonate /> },
+    { id: 4, path: '/reseñas', title: 'RESEÑAS', icon: <FaStar /> },
+    { id: 5, path: '/contacto', title: 'CONTACTO', icon: <FaPhone /> },
   ];
 
   const menuVariants = {
     expanded: {
-      width: isMobile ? '100%' : '200px',
+      width: isMobile ? '100%' : '264px',
       transition: { duration: 0.3, ease: 'easeInOut' },
     },
     collapsed: {
-      width: isMobile ? '100%' : '60px',
+      width: isMobile ? '100%' : '80px',
       transition: { duration: 0.3, ease: 'easeInOut' },
     },
   };

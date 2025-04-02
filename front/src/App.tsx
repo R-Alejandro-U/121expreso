@@ -1,3 +1,4 @@
+// src/App.tsx
 import React, { useContext, useEffect, useState } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import Home from './views/Home/Home';
@@ -50,13 +51,27 @@ const App: React.FC = () => {
 
   return (
     <div className={`radio-app ${menuExpanded ? 'menu-expanded' : ''}`}>
+      <main className="app-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/conocenos" element={<Conocenos />} />
+          <Route path="/contacto" element={<Contacto />} />
+          <Route path="/donaciones" element={<Donaciones />} />
+          <Route path="/reseñas" element={<Reseñas />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/registro" element={<Registro />} />
+          {user && <></>}
+        </Routes>
+      </main>
+
+      {shouldShowMenu && <RadioMenu onMenuToggle={handleMenuToggle} />}
+
       {shouldShowMenu && (
-        <header className="app-header">
-          <div className="logo">
+        <footer className="app-footer">
+          <div className="footer-left">
             <img src="/logo.png" alt="121 Expreso" className="logo-image" />
           </div>
-          <div className="header-actions">
-            <div className="search-icon">🔍</div>
+          <div className="footer-right">
             {user ? (
               <div className="user-icon">👤</div>
             ) : (
@@ -79,36 +94,6 @@ const App: React.FC = () => {
                   />
                 </svg>
               </div>
-            </button>
-          </div>
-        </header>
-      )}
-
-      <main className="app-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/conocenos" element={<Conocenos />} />
-          <Route path="/contacto" element={<Contacto />} />
-          <Route path="/donaciones" element={<Donaciones />} />
-          <Route path="/reseñas" element={<Reseñas />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/registro" element={<Registro />} />
-          {user && <></>}
-        </Routes>
-      </main>
-
-      {shouldShowMenu && <RadioMenu onMenuToggle={handleMenuToggle} />}
-
-      {shouldShowMenu && (
-        <footer className="app-footer">
-          <div className="footer-left">
-            <img src="/logo.png" alt="121 Expreso" className="logo-image" />
-            <span>#121EXPRESO</span>
-          </div>
-          <div className="footer-right">
-            <button className="live-button">
-              EN VIVO
-              <span role="img" aria-label="play">▶️</span>
             </button>
             <div className="social-icon">📘</div>
             <div className="social-icon">📷</div>

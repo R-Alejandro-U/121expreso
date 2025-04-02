@@ -1,25 +1,39 @@
 /* RadioMenu.module.css */
+
+/* Variables */
 :root {
-  --menu-bg: rgba(30, 30, 30, 0.5); /* Fondo gris oscuro con opacidad cuando está colapsado */
-  --menu-bg-expanded: rgba(30, 30, 30, 0.9); /* Fondo más opaco cuando está expandido */
-  --menu-hover: rgba(255, 0, 0, 0.3);
+  --menu-background: rgba(64, 88, 109, 0.9);
+  --menu-hover: transparent;
   --menu-active: rgba(255, 0, 0, 0.5);
   --text-color: #ffffff;
   --icon-color: #ffffff;
-  --primary-color: #ff0000;
+  --primary-color: transparent;
+
+  /* Colores de los íconos por ítem */
+  --icon-color-1: #00b7eb; /* Inicio */
+  --icon-color-2: #8a4af3; /* Conocenos */
+  --icon-color-3: #ffcc00; /* Donaciones */
+  --icon-color-4: #ff4d4d; /* Reseñas */
+  --icon-color-5: #00cc00; /* Contacto */
+
+  /* Colores de los íconos activos */
+  --icon-active-color-1: #4dd2f5;
+  --icon-active-color-2: #a77df7;
+  --icon-active-color-3: #ffd633;
+  --icon-active-color-4: #ff6666;
+  --icon-active-color-5: #33ff33;
 }
 
-/* Contenedor principal */
+/* Contenedor principal y botón de toggle */
 .radio-menu {
-  position: fixed;
+  position: fixed; /* Cambiado a fixed para escritorio */
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 100vh; /* Ajustado para ocupar toda la altura */
   z-index: 900;
   display: flex;
 }
 
-/* Botón para expandir/contraer */
 .menu-toggle {
   position: fixed;
   top: 20px;
@@ -29,8 +43,7 @@
   border: none;
   width: 30px;
   height: 30px;
-  border-radius: 50%;
-  font-size: 16px;
+  font-size: 27px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,7 +53,7 @@
 }
 
 .menu-toggle:hover {
-  background-color: #e60000;
+  background-color: transparent;
 }
 
 .menu-container.expanded + .menu-toggle {
@@ -49,19 +62,18 @@
 
 /* Contenedor del menú */
 .menu-container {
-  background: var(--menu-bg);
+  background: var(--menu-background);
   height: 100%;
   width: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 20px;
-  transition: width 0.3s ease, background 0.3s ease;
+  padding-top: 18em;
+  transition: width 0.3s ease;
 }
 
 .menu-container.expanded {
   width: 200px;
-  background: var(--menu-bg-expanded);
   align-items: flex-start;
 }
 
@@ -78,38 +90,20 @@
   align-items: center;
   color: var(--text-color);
   text-decoration: none;
-  padding: 10px 15px;
-  margin: 15px 0;
+  padding: 5px 15px;
+  margin: 9px 0;
   width: 100%;
   box-sizing: border-box;
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.menu-item:hover {
+.menu-item:hover,
+.menu-item.active {
   background-color: var(--menu-hover);
-  transform: scale(1.05);
 }
 
 .menu-item.active {
   background-color: var(--menu-active);
-  border-radius: 10px;
-  transform: scale(1.05);
-}
-
-.menu-item.active:nth-child(1) .menu-icon {
-  background-color: #4dd2f5;
-}
-.menu-item.active:nth-child(2) .menu-icon {
-  background-color: #a77df7;
-}
-.menu-item.active:nth-child(3) .menu-icon {
-  background-color: #ffd633;
-}
-.menu-item.active:nth-child(4) .menu-icon {
-  background-color: #ff6666;
-}
-.menu-item.active:nth-child(5) .menu-icon {
-  background-color: #33ff33;
 }
 
 .menu-icon {
@@ -118,26 +112,44 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   border-radius: 50%;
   background-color: #3a3a3a;
   transition: background-color 0.2s ease;
+  color: var(--icon-color);
 }
 
+/* Colores de los íconos */
 .menu-item:nth-child(1) .menu-icon {
-  background-color: #00b7eb;
+  background-color: var(--icon-color-1);
 }
 .menu-item:nth-child(2) .menu-icon {
-  background-color: #8a4af3;
+  background-color: var(--icon-color-2);
 }
 .menu-item:nth-child(3) .menu-icon {
-  background-color: #ffcc00;
+  background-color: var(--icon-color-3);
 }
 .menu-item:nth-child(4) .menu-icon {
-  background-color: #ff4d4d;
+  background-color: var(--icon-color-4);
 }
 .menu-item:nth-child(5) .menu-icon {
-  background-color: #00cc00;
+  background-color: var(--icon-color-5);
+}
+
+.menu-item.active:nth-child(1) .menu-icon {
+  background-color: var(--icon-active-color-1);
+}
+.menu-item.active:nth-child(2) .menu-icon {
+  background-color: var(--icon-active-color-2);
+}
+.menu-item.active:nth-child(3) .menu-icon {
+  background-color: var(--icon-active-color-3);
+}
+.menu-item.active:nth-child(4) .menu-icon {
+  background-color: var(--icon-active-color-4);
+}
+.menu-item.active:nth-child(5) .menu-icon {
+  background-color: var(--icon-active-color-5);
 }
 
 .menu-text {
@@ -149,9 +161,12 @@
 
 /* Versión móvil */
 .radio-menu.mobile {
-  top: 0;
+  bottom: 0;
+  top: auto;
   width: 100%;
   height: 60px;
+  background: var(--menu-background);
+  z-index: 850;
 }
 
 .radio-menu.mobile .menu-container {
