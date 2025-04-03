@@ -1,9 +1,13 @@
-// src/components/RadioMenu/RadioMenu.tsx
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import styles from './RadioMenu.module.css';
-import { FaDonate, FaHome, FaPhone, FaStar, FaUsers } from 'react-icons/fa';
+import DiscodeVinilo from "../../assets/disco-de-vinilo.svg"
+import OndasdeRadio from "../../assets/ondas-de-radio.svg"
+import RockRoll from "../../assets/rock-and-roll.svg"
+import Corazon from "../../assets/corazon.svg"
+import Contacto from "../../assets/audifonos-inalambricos.svg"
+
 
 interface RadioMenuProps {
   onMenuToggle?: (expanded: boolean) => void;
@@ -41,11 +45,11 @@ const RadioMenu: React.FC<RadioMenuProps> = ({ onMenuToggle }) => {
   };
 
   const menuItems = [
-    { id: 1, path: '/', title: 'INICIO', icon: <FaHome /> },
-    { id: 2, path: '/conocenos', title: 'CONOCENOS', icon: <FaUsers /> },
-    { id: 3, path: '/donaciones', title: 'DONACIONES', icon: <FaDonate /> },
-    { id: 4, path: '/reseñas', title: 'RESEÑAS', icon: <FaStar /> },
-    { id: 5, path: '/contacto', title: 'CONTACTO', icon: <FaPhone /> },
+    { id: 1, path: '/', title: 'INICIO', icon: <img src={DiscodeVinilo} alt='Inicio'/> },
+    { id: 2, path: '/conocenos', title: 'CONOCENOS', icon: <img src={OndasdeRadio} alt='Conocenos'/> },
+    { id: 3, path: '/donaciones', title: 'DONACIONES', icon: <img src={RockRoll} alt='Donaciones'/> },
+    { id: 4, path: '/reseñas', title: 'RESEÑAS', icon: <img src={Corazon} alt='Reseñas'/> },
+    { id: 5, path: '/contacto', title: 'CONTACTO', icon: <img src={Contacto} alt='Contacto'/> },
   ];
 
   const menuVariants = {
@@ -54,7 +58,7 @@ const RadioMenu: React.FC<RadioMenuProps> = ({ onMenuToggle }) => {
       transition: { duration: 0.3, ease: 'easeInOut' },
     },
     collapsed: {
-      width: isMobile ? '100%' : '80px',
+      width: isMobile ? '100%' : '93px',
       transition: { duration: 0.3, ease: 'easeInOut' },
     },
   };

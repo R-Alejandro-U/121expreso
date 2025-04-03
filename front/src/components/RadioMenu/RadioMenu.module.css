@@ -1,23 +1,29 @@
-/* RadioMenu.module.css */
+/* Definir la fuente Nico Moji */
+@font-face {
+  font-family: 'Nico Moji';
+  src: url('../../assets/fonts/NicoMoji-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 /* Variables */
 :root {
   --menu-background: rgba(64, 88, 109, 0.9);
-  --menu-hover: transparent;
-  --menu-active: rgba(255, 0, 0, 0.5);
+  --menu-hover: rgba(0, 225, 255, 0.5);
+  --menu-active: rgba(0, 225, 255, 0.5);
   --text-color: #ffffff;
   --icon-color: #ffffff;
   --primary-color: transparent;
 
   /* Colores de los íconos por ítem */
-  --icon-color-1: #00b7eb; /* Inicio */
+  --icon-color-1: #856B36; /* Inicio */
   --icon-color-2: #8a4af3; /* Conocenos */
   --icon-color-3: #ffcc00; /* Donaciones */
   --icon-color-4: #ff4d4d; /* Reseñas */
   --icon-color-5: #00cc00; /* Contacto */
 
   /* Colores de los íconos activos */
-  --icon-active-color-1: #4dd2f5;
+  --icon-active-color-1: #c29c51;
   --icon-active-color-2: #a77df7;
   --icon-active-color-3: #ffd633;
   --icon-active-color-4: #ff6666;
@@ -26,10 +32,10 @@
 
 /* Contenedor principal y botón de toggle */
 .radio-menu {
-  position: fixed; /* Cambiado a fixed para escritorio */
+  position: fixed;
   top: 0;
   left: 0;
-  height: 100vh; /* Ajustado para ocupar toda la altura */
+  height: 100vh;
   z-index: 900;
   display: flex;
 }
@@ -43,7 +49,8 @@
   border: none;
   width: 30px;
   height: 30px;
-  font-size: 27px;
+  border-radius: 50%;
+  font-size: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,12 +70,12 @@
 /* Contenedor del menú */
 .menu-container {
   background: var(--menu-background);
-  height: 100%;
+  height: 106%;
   width: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 18em;
+  padding-top: 12em;
   transition: width 0.3s ease;
 }
 
@@ -90,7 +97,7 @@
   align-items: center;
   color: var(--text-color);
   text-decoration: none;
-  padding: 5px 15px;
+  padding: 9px 28px;
   margin: 9px 0;
   width: 100%;
   box-sizing: border-box;
@@ -100,6 +107,7 @@
 .menu-item:hover,
 .menu-item.active {
   background-color: var(--menu-hover);
+  transform: scale(1.05);
 }
 
 .menu-item.active {
@@ -117,6 +125,12 @@
   background-color: #3a3a3a;
   transition: background-color 0.2s ease;
   color: var(--icon-color);
+}
+
+.menu-icon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 /* Colores de los íconos */
@@ -153,10 +167,23 @@
 }
 
 .menu-text {
-  margin-left: 15px;
+  margin-left: 24px;
   font-size: 1rem;
-  font-weight: bold;
-  font-family: 'Arial', sans-serif;
+  font-weight: normal;
+  font-family: 'Nico Moji', sans-serif;
+  opacity: 0; 
+  transition: opacity 0.3s ease; 
+  transition-delay: 0.3s; 
+}
+
+/* Cuando el menú está expandido, mostramos las letras */
+.menu-container.expanded .menu-text {
+  opacity: 1; /* Visible cuando el menú está expandido */
+}
+
+/* Cuando el menú está colapsado, aseguramos que las letras desaparezcan sin retraso */
+.menu-container:not(.expanded) .menu-text {
+  transition-delay: 0s; /* Sin retraso al colapsar */
 }
 
 /* Versión móvil */
@@ -190,4 +217,7 @@
   margin-left: 0;
   margin-top: 5px;
   font-size: 0.7rem;
+  font-family: 'Nico Moji', sans-serif;
+  opacity: 1; /* En móvil, siempre visible, sin transición */
+  transition: none; /* Sin transición en móvil */
 }
