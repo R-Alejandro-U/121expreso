@@ -1,5 +1,3 @@
-/* App.css */
-
 /* Contenedor principal */
 .radio-app {
   min-height: 100vh;
@@ -16,9 +14,9 @@
   z-index: 1;
 }
 
-.radio-app.menu-expanded .app-content {
-  padding-left: 200px;
-}
+/* .radio-app.menu-expanded .app-content {
+  padding-left: 229px;
+} */
 
 /* Footer */
 .app-footer {
@@ -86,11 +84,6 @@
   display: inline-block;
 }
 
-.search-icon,
-.user-icon {
-  font-size: 1.5rem;
-  cursor: pointer;
-}
 
 .social-icon {
   width: 30px;
@@ -107,6 +100,20 @@
 
 .social-icon:hover {
   background-color: #555555;
+}
+
+.logo-image {
+  min-width: 50px;
+  height: 51px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-image img {
+  width: 24px; /* Ajusta el tamaño de la imagen */
+  height: 24px;
+  object-fit: contain; /* Asegura que la imagen no se distorsione */
 }
 
 /* Media queries para modo móvil */
@@ -128,13 +135,7 @@
   }
 }
 
-/* Estilos adicionales (si los necesitas) */
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: start;
-}
+
 
 .card {
   padding: 2em;

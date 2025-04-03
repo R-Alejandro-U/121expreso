@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@100..900&family=Rock+Salt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+/*FONTS
+font-family: "Noto Sans Tamil", sans-serif;
+font-family: "Noto Sans", sans-serif;
+*/
+
+
+/* Contenedor principal */
+.home-container {
+    width: 100vw; /* Usa el ancho completo del viewport */
+    height: 100vh; /* Usa la altura completa del viewport */
+    margin: 0; /* Elimina cualquier margen heredado / aunque no es necesario */
+    padding: 0; /* Elimina cualquier padding heredado */
+    overflow: hidden;
+}
+  
+  /* Video de fondo */
+.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 105%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+  
+  /* Contenido encima del video */
+.content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+  
+  /* Estilos para el título y el párrafo */
+.content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+  
+.content p {
+    font-size: 1.5rem;
+}
+
+.logo-home {
+   min-width: 50px;
+   height: 5em;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding-left: 0em !important;
+   padding-top: 0em !important;
+}
+  
+.logo-home img {
+  width: 10em; /* Ajusta el tamaño de la imagen */
+  height: 24px;
+  object-fit: contain; /* Asegura que la imagen no se distorsione */
+}
+
+.parrafo-home {
+    margin: 1em !important;
+}
+  
+/* Ajustes para móvil */
+@media (max-width: 768px) {
+.content h1 {
+      font-size: 2rem;
+}
+  
+.content p {
+      font-size: 1rem;
+}
+}

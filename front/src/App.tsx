@@ -11,6 +11,7 @@ import Login from './views/Login/Login';
 import Registro from './views/Registro/Registro';
 import RadioMenu from './components/RadioMenu/RadioMenu';
 import Reseñas from './views/Reseñas/Reseñas';
+import logo from "./assets/banner.svg"
 
 const App: React.FC = () => {
   const { user } = useContext(UserContext);
@@ -50,7 +51,9 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className={`radio-app ${menuExpanded ? 'menu-expanded' : ''}`}>
+    <div className={`radio-app ${menuExpanded ? 'menu-expanded' : ''} ${
+      location.pathname === '/' ? 'home-page' : ''
+    }`}>
       <main className="app-content">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -69,7 +72,7 @@ const App: React.FC = () => {
       {shouldShowMenu && (
         <footer className="app-footer">
           <div className="footer-left">
-            <img src="/logo.png" alt="121 Expreso" className="logo-image" />
+            <img src={logo} alt="121 Expreso" className="logo-image" />
           </div>
           <div className="footer-right">
             {user ? (
@@ -95,9 +98,6 @@ const App: React.FC = () => {
                 </svg>
               </div>
             </button>
-            <div className="social-icon">📘</div>
-            <div className="social-icon">📷</div>
-            <div className="social-icon">🐦</div>
           </div>
         </footer>
       )}
