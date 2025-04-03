@@ -3,11 +3,11 @@ import 'dotenv/config';
 const data: NodeJS.ProcessEnv = process.env;
 export const PORT: number = data['PORT'] ? parseInt(data['PORT'], 10) : 3000;
 export const CONECTION_STREAM: string | undefined = data['CONECTION_STREAM'];
-const DB_TYPE: any = data['DB_TYPE'] ?? 'postgres';
+const DB_TYPE: any = data['DB_TYPE'] ?? 'mysql';
 const DB_HOST: string | undefined = data['DB_HOST'];
 const DB_PORT: number | undefined = data['DB_PORT']
   ? parseInt(data['DB_PORT'], 10)
-  : 5432;
+  : 3306;
 const DB_USERNAME: string | undefined = data['DB_USERNAME'];
 const DB_PASSWORD: string | undefined = data['DB_PASSWORD'];
 const DB_NAME: string | undefined = data['DB_NAME'];
