@@ -70,7 +70,7 @@
 /* Contenedor del menú */
 .menu-container {
   background: var(--menu-background);
-  height: 106%;
+  height: 151vh;
   width: 60px;
   display: flex;
   flex-direction: column;
