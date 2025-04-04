@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import styles from './RadioMenu.module.css';
-import DiscodeVinilo from "../../assets/disco-de-vinilo.svg"
-import OndasdeRadio from "../../assets/ondas-de-radio.svg"
-import RockRoll from "../../assets/rock-and-roll.svg"
-import Corazon from "../../assets/corazon.svg"
-import Contacto from "../../assets/audifonos-inalambricos.svg"
+import DiscodeVinilo from "../../assets/icons/disco-de-vinilo.svg"
+import OndasdeRadio from "../../assets/icons/ondas-de-radio.svg"
+import RockRoll from "../../assets/icons/rock-and-roll.svg"
+import Corazon from "../../assets/icons/corazon.svg"
+import Contacto from "../../assets/icons/audifonos-inalambricos.svg"
 
 
 interface RadioMenuProps {
