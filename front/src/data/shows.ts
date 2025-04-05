@@ -1,6 +1,8 @@
+import audioQueen from '../assets/media/Queen - We Are The Champions (Live).mp3'
+
 export const shows = [
-    { title: 'Capítulo 1', duration: '20:46 min', image: '/assets/images/show1.jpg' },
-    { title: 'Capítulo 1', duration: '18:29 min', image: '/assets/images/show2.jpg' },
-    { title: 'Capítulo 1', duration: '16:40 min', image: '/assets/images/show3.jpg' },
-    { title: 'Capítulo 1', duration: '20:46 min', image: '/assets/images/show4.jpg' },
+    { title: 'Capítulo 1', duration: '1 h 46 min', date: '20/05/2009', image: 'https://img.freepik.com/foto-gratis/manos-masculinas-tocando-hermosa-guitarra-vintage_23-2148328613.jpg?t=st=1743804830~exp=1743808430~hmac=773bc2f4e24666b39a215c85816040970947278b0dc865700f48707eb7bc629d&w=740', media: audioQueen },
+    { title: 'Capítulo 2', duration: '1 h 46 min', date: '20/05/2009', image: 'https://img.freepik.com/foto-gratis/manos-masculinas-tocando-hermosa-guitarra-vintage_23-2148328613.jpg?t=st=1743804830~exp=1743808430~hmac=773bc2f4e24666b39a215c85816040970947278b0dc865700f48707eb7bc629d&w=740', media: '/assets/media/show2.mp4' },
+    { title: 'Capítulo 3', duration: '1 h 46 min', date: '20/05/2009', image: 'https://img.freepik.com/foto-gratis/manos-masculinas-tocando-hermosa-guitarra-vintage_23-2148328613.jpg?t=st=1743804830~exp=1743808430~hmac=773bc2f4e24666b39a215c85816040970947278b0dc865700f48707eb7bc629d&w=740', media: '/assets/media/show3.mp4' },
+    { title: 'Capítulo 4', duration: '1 h 46 min', date: '20/05/2009', image: 'https://img.freepik.com/foto-gratis/manos-masculinas-tocando-hermosa-guitarra-vintage_23-2148328613.jpg?t=st=1743804830~exp=1743808430~hmac=773bc2f4e24666b39a215c85816040970947278b0dc865700f48707eb7bc629d&w=740', media: '/assets/media/show4.mp4' },
 ];
