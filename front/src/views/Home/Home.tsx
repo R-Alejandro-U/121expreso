@@ -1,89 +1,30 @@
-// src/pages/Home.tsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import styles from './Home.module.css';
 import backgroundVideo from '../../assets/videos/vinilo-video.mp4';
 import logo from '../../assets/banner.svg';
-import { shows } from '../../data/shows';
 import { reviews } from '../../data/reviews';
 import { ReviewCardProps } from '../../interfaces/IReviewProps';
 import { ShowCardProps } from '../../interfaces/IShowProps';
+import { getAllShows, IProgramLite } from '../../helpers/getRadio';
 
-const ShowCard: React.FC<ShowCardProps> = ({ title, duration, date, image, media }) => {
-  const audioRef = React.useRef<HTMLAudioElement>(null);
-  const [isPlaying, setIsPlaying] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
-
-  const togglePlay = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        setIsLoading(true);
-        audioRef.current
-          .play()
-          .then(() => {
-            setIsPlaying(true);
-            setIsLoading(false);
-          })
-          .catch((error) => {
-            console.error('Error al reproducir el audio:', error);
-            setIsLoading(false);
-          });
-      }
-    }
-  };
-
-  const skipForward = () => {
-    if (audioRef.current) {
-      audioRef.current.currentTime += 10; // Avanza 10 segundos
-    }
-  };
-
-  const skipBackward = () => {
-    if (audioRef.current) {
-      audioRef.current.currentTime -= 10; // Retrocede 10 segundos
-    }
-  };
-
-  const toggleVolume = () => {
-    if (audioRef.current) {
-      audioRef.current.volume = audioRef.current.volume > 0 ? 0 : 1; // Alterna entre mute y volumen completo
-    }
-  };
-
-  const goHome = () => {
-    // Aquí puedes agregar lógica para el botón "home", como redirigir a otra página
-    console.log('Botón Home presionado');
-  };
-
+const ShowCard: React.FC<ShowCardProps> = ({ title, duration, date, image, url }) => {
   return (
     <div className={styles.showCard}>
-      <img src={image} alt={title} className={styles.showImage} />
-      <audio ref={audioRef} className={styles.showAudio} style={{ display: 'none' }}>
-        <source src={media} type="audio/mpeg" />
-        Tu navegador no soporta el elemento de audio.
-      </audio>
+      <img
+        src={image}
+        alt={title}
+        className={styles.showImage}
+        onError={(e) => (e.currentTarget.src = '/path/to/fallback-image.jpg')}
+      />
       <h3>{title}</h3>
       <p>{duration}</p>
       <p>{date}</p>
-      <div className={styles.controls}>
-        <button onClick={goHome} className={styles.controlButton} style={{ gridArea: 'home' }}>
-          🏠
-        </button>
-        <button onClick={skipBackward} className={styles.controlButton} style={{ gridArea: 'backward' }}>
-          ⏪
-        </button>
-        <button onClick={togglePlay} className={styles.playButton} disabled={isLoading} style={{ gridArea: 'play' }}>
-          {isLoading ? 'Cargando...' : isPlaying ? '⏸' : '▶'}
-        </button>
-        <button onClick={skipForward} className={styles.controlButton} style={{ gridArea: 'forward' }}>
-          ⏩
-        </button>
-        <button onClick={toggleVolume} className={styles.controlButton} style={{ gridArea: 'volume' }}>
-          🔊
-        </button>
-      </div>
+      <a href={url} target="_blank" rel="noopener noreferrer" className={styles.listenButton}>
+        Escuchar en Mixcloud
+      </a>
     </div>
   );
 };
@@ -97,6 +38,46 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ text, author, date }) => (
 );
 
 const Home: React.FC = () => {
+  const [shows, setShows] = useState<IProgramLite[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchShows = async () => {
+      try {
+        setLoading(true);
+        const fetchedShows = await getAllShows();
+        setShows(fetchedShows);
+      } catch (err) {
+        setError('No se pudieron cargar los shows. Intenta de nuevo más tarde.');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchShows();
+  }, []);
+
+  const settings = {
+    dots: true,
+    infinite: shows.length > 1,
+    speed: 500,
+    slidesToShow: Math.min(shows.length, 3),
+    slidesToScroll: 1,
+    autoplay: shows.length > 1,
+    autoplaySpeed: 3000,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   return (
     <div className={styles.homeContainer}>
       <video className={styles.backgroundVideo} autoPlay loop muted playsInline>
@@ -119,24 +100,36 @@ const Home: React.FC = () => {
           <button className={styles.contactButton}>CONTÁCTAME</button>
         </div>
       </div>
+
+      <section className={styles.oldShowsCassete}>
+        <h2 className={styles.cassetteTitle}>OLD SHOWS</h2>
+      </section>
+
       <section className={styles.oldShowsSection}>
-        <h2 className={styles.sectionTitle}>OLD SHOWS PROGRAMAS ANTERIORES</h2>
-        <div className={styles.showsGrid}>
-          {shows.map((show, index) => (
-            <ShowCard
-              key={index}
-              title={show.title}
-              duration={show.duration}
-              date={show.date}
-              image={show.image}
-              media={show.media}
-            />
-          ))}
-        </div>
+        <h2 className={styles.sectionTitle}>PROGRAMAS ANTERIORES</h2>
+        {loading ? (
+          <p>Cargando shows...</p>
+        ) : error ? (
+          <p>{error}</p>
+        ) : (
+          <Slider {...settings} className={styles.showsGrid}>
+            {shows.map((show, index) => (
+              <ShowCard
+                key={index}
+                title={show.title}
+                duration={show.duration}
+                date={show.date || 'Fecha no disponible'}
+                image={show.image}
+                url={show.url} // Usamos la url para redirigir a Mixcloud
+              />
+            ))}
+          </Slider>
+        )}
         <button className={styles.viewAllButton}>VER TODOS</button>
       </section>
+
       <section className={styles.reviewsSection}>
-        <h2 className={styles.sectionTitle}>RESEÑAS DE LOS OYENTES "LA MÚSICA NOS TRASLADA"</h2>
+        <h2 className={styles.sectionTitle}>RESEÑAS DE LOS OYENTES <br /> "LA MÚSICA NOS TRASLADA"</h2>
         <div className={styles.reviewsGrid}>
           {reviews.map((review, index) => (
             <ReviewCard key={index} text={review.text} author={review.author} date={review.date} />

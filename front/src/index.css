@@ -8,15 +8,37 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url('../public/estrellas.svg');
+  background-image: linear-gradient(
+    to bottom,
+    #13162D 32%, /* Azul oscuro al 32% */
+    #411E92 62%, /* Púrpura medio al 62% */
+    #140B2E 94% /* Azul muy oscuro al 94% */
+  ); /* Degradado con los colores del prototipo */
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
   color: #ffffff;
+  position: relative; /* Necesario para el pseudo-elemento */
+  min-height: 100vh; /* Asegura que el body ocupe toda la altura */
+}
+
+/* Pseudo-elemento para la imagen con opacidad */
+body::before {
+  content: '';
+  position: fixed; /* Fija el fondo para que no se mueva al hacer scroll */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../public/estrellas.svg'); /* Imagen de fondo */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.3; /* Reduce la opacidad de la imagen */
+  z-index: -1; /* Coloca el fondo detrás del contenido */
 }
 
 a {
   text-decoration: none;
   color: inherit;
 }
-
