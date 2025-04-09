@@ -144,11 +144,11 @@
 /* Sección de imagen OLD SHOWS */
 .oldShowsCassete {
   position: relative;
-  width: 90%;
+  width: 100%;
   max-width: 166vh;
-  height: 68vh;
+  height: 57vh;
   margin: 0 auto 45px;
-  background-image: url('../../assets/fondo-cassete.svg');
+  background-image: url('../../assets/mano.svg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -157,6 +157,18 @@
   align-items: center;
   border-radius: 20px;
   overflow: hidden;
+}
+
+
+.oldShowsCassete::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* Capa negra semitransparente */
+  z-index: 1;
 }
 
 .cassetteTitle {
@@ -348,9 +360,18 @@
     padding-top: 100vh; /* Mantiene el contenido debajo del video en móvil */
   }
 
+  .logoHome {
+    max-width: 19em;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+  }
+
   .card {
-    padding: 15px;
+    padding: 60px 33px;
     width: 95%;
+    margin: 2em 1em 2em 1em;
   }
 
   .bannerTitle {
@@ -370,14 +391,24 @@
   .showCard,
   .reviewCard {
     width: 100%;
-    max-width: 300px;
+    max-width: 41.5vh;
   }
 
   .oldShowsSection,
   .reviewsSection {
-    padding: 20px 10px;
+    padding: 20px 39px;
     margin-top: 60px; /* Espacio para el RadioMenu */
     margin-bottom: 120px; /* Espacio para el footer (60px) + RadioMenu (60px) */
+  }
+
+  .oldShowsCassete {
+    width: 96%;
+    max-width: 129vh;
+    height: 57vh;
+  }
+
+  .cassetteTitle {
+    font-size: 2.7rem;
   }
 
   .slick-prev {
