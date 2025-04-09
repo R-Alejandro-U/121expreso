@@ -1,0 +1,151 @@
+.containerFooter {
+    background-color: rgba(64, 88, 109, 0.9);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1em 2em 4em 2.7em;
+    margin: 13px 15px 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 911;
+    box-sizing: border-box;
+    color: #ffffff;
+    font-family: 'Noto Sans', sans-serif;
+}
+  
+/* Primera columna */
+.firstColumn {
+    flex: 1;
+    max-width: 50%;
+}
+  
+.titleColumnOne {
+    font-size: 2rem;
+    font-family: 'Rock Salt', cursive;
+    margin-bottom: 10px;
+}
+  
+.paragraphColumnOne {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+  
+.logo {
+    max-width: 150px;
+    height: auto;
+}
+  
+/* Línea divisoria */
+.line {
+    width: 1px;
+    background-color: #ffffff;
+    height: 100%;
+    margin: 0 20px;
+}
+  
+/* Segunda columna */
+.secondColumn {
+    flex: 1;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+  
+.titleColumnTwo {
+    font-size: 2rem;
+    font-family: 'Rock Salt', cursive;
+    margin-bottom: 20px;
+}
+  
+.socialLogo {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+  
+.socialIcon {
+    width: 40px;
+    height: 40px;
+    background-color: #3a3a3a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #ffffff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+  
+.socialIcon:hover {
+    background-color: #555555;
+}
+  
+  /* Créditos */
+.credits {
+    margin-top: 20px;
+}
+  
+.titleColumnThree {
+    font-size: 1.5rem;
+    font-family: 'Rock Salt', cursive;
+    margin-bottom: 10px;
+}
+  
+.paragraphColumnTwo {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+  
+.creditLink {
+    color: #00aaff;
+    text-decoration: underline;
+}
+  
+.creditLink:hover {
+    color: #0088cc;
+}
+  
+  /* Copyright */
+.copyright {
+    position: absolute;
+    bottom: 3em;
+    right: 40px;
+    font-size: 0.8rem;
+}
+  
+  /* Ajustes para móvil */
+@media (max-width: 768px) {
+    .containerFooter {
+      flex-direction: column;
+      padding: 20px 20px 6em 20px;
+      align-items: center;
+      bottom: 60px; /* Espacio para el RadioMenu en móvil */
+      margin: 0;
+    }
+  
+    .firstColumn,
+    .secondColumn {
+      max-width: 100%;
+      text-align: center;
+    }
+  
+    .line {
+      width: 100%;
+      height: 1px;
+      margin: 20px 0;
+    }
+  
+    .socialLogo {
+      justify-content: center;
+      align-self: center;
+    }
+  
+    .copyright {
+      position: static;
+      margin-top: 20px;
+    }
+}
