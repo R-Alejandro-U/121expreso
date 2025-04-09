@@ -77,6 +77,7 @@
   align-items: center;
   padding-top: 12em;
   transition: width 0.3s ease;
+  border-right: 1px solid;
 }
 
 .menu-container.expanded {

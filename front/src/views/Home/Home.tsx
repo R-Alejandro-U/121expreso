@@ -9,6 +9,7 @@ import { reviews } from '../../data/reviews';
 import { ReviewCardProps } from '../../interfaces/IReviewProps';
 import { ShowCardProps } from '../../interfaces/IShowProps';
 import { getAllShows, IProgramLite } from '../../helpers/getRadio';
+import Footer from '../../components/Footer/Footer';
 
 const ShowCard: React.FC<ShowCardProps> = ({ title, duration, date, image, url }) => {
   return (
@@ -137,6 +138,10 @@ const Home: React.FC = () => {
         </div>
         <button className={styles.addCommentButton}>AGREGAR COMENTARIO</button>
       </section>
+
+      <div>
+        <Footer/>
+      </div>
     </div>
   );
 };
