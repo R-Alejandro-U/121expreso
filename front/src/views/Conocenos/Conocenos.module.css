@@ -1,0 +1,374 @@
+/* Importar fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Variables de fuentes */
+:root {
+  --font-tamil: 'Rock Salt', cursive;
+  --font-sans: 'Noto Sans', sans-serif;
+}
+
+/* Contenedor principal */
+.containerConocenos {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  color: #ffffff;
+  font-family: var(--font-sans);
+}
+
+/* Sección 1: Título e imagen */
+.firstSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 75vh;
+  position: relative; /* Para que position: absolute de la imagen funcione */
+}
+
+.column1 {
+  flex: 1;
+  padding: 0 7em;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 3rem;
+  font-family: var(--font-tamil);
+  line-height: 1.2;
+}
+
+.column2 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Para que la imagen pueda posicionarse absolutamente dentro de este contenedor */
+  overflow: visible; /* Permite que la imagen sobresalga */
+  background: linear-gradient(180deg, #1a2a44 0%, #0d1a2d 100%); /* Fondo gradiente oscuro */
+}
+
+.manSinging {
+  max-width: 100%;
+  height: auto;
+  max-height: 67vh;
+  position: absolute;
+  z-index: 1;
+  box-shadow: 0 12px 34px #000000;
+  border-radius: 1em;
+  border: solid;
+}
+
+/* Sección 2: Descripción */
+.secondSection {
+  padding: 87px 40px;
+  text-align: center;
+  background-color: #FEFFD4;
+  color: black;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-family: var(--font-tamil);
+  margin-bottom: 20px;
+}
+
+.sectionParagraph {
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Sección 3: Imagen y texto "Escuchanos" */
+.thirdSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 50vh;
+  position: relative; /* Para que el ::before se posicione dentro de esta sección */
+}
+
+.thirdSection::before {
+  content: ''; /* Necesario para que el pseudo-elemento se renderice */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(26, 42, 68, 0.5) 0%, rgba(13, 26, 45, 0.5) 100%); /* Gradiente semitransparente */
+  z-index: -1; /* Por detrás del contenido de thirdSection */
+}
+
+.column3 {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.girlHeadphones {
+  max-width: 100%;
+  height: auto;
+  max-height: 117vh;
+}
+
+.column4 {
+  flex: 1;
+  padding: 0 20px;
+}
+
+.listenTitle {
+  font-size: 3rem;
+  font-family: var(--font-tamil);
+}
+
+.whereTitle {
+  font-size: 3rem;
+  font-family: var(--font-tamil);
+  color: #ffcc00; /* Amarillo */
+  margin-bottom: 20px;
+}
+
+.listenParagraph {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Sección 4: Tarjeta "Más Preguntas?" */
+.cardSection {
+  background-color: rgba(255, 255, 224);
+  padding: 40px 121px;
+  text-align: start;
+  margin: 40px 105px;
+  margin-top: -100px; /* Mueve la tarjeta hacia arriba para que se superponga con thirdSection */
+  border-radius: 10px;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.7);
+  position: relative; /* Asegura que la tarjeta esté en el contexto de apilamiento correcto */
+  z-index: 2; /* Coloca la tarjeta por encima de thirdSection */
+}
+
+.moreTitle {
+  font-size: 2.5rem;
+  font-family: var(--font-tamil);
+  color: #000;
+  margin: 0;
+}
+
+.questionsTitle {
+  color: #ffcc00;
+  font-size: 2.5rem;
+  font-family: var(--font-tamil);
+  margin: 0;
+}
+
+.contactButton {
+  background-color: #000;
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 18px 20px;
+  border-radius: 0.5em;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.contactButton:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+/* Ajustes para móvil */
+@media (max-width: 768px) {
+  .containerConocenos {
+    padding-top: 60px;
+  }
+
+  /* Sección 1 */
+  .firstSection {
+    flex-direction: column;
+    text-align: center;
+    min-height: auto;
+    padding: 20px 0;
+  }
+
+  .column1 {
+    flex: none;
+    width: 100%;
+    padding: 0 20px;
+    order: 1; /* Asegura que el título aparezca primero */
+  }
+
+  .column2 {
+    flex: none;
+    width: 100%;
+    padding: 20px 0;
+    background: none;
+    order: 2; /* Asegura que la imagen aparezca después */
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .manSinging {
+    position: static;
+    max-height: 300px;
+    margin: 20px 0;
+    border: none;
+  }
+
+  /* Sección 2 */
+  .secondSection {
+    padding: 40px 20px;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .sectionParagraph {
+    font-size: 0.9rem;
+    max-width: 100%;
+  }
+
+  /* Sección 3 */
+  .thirdSection {
+    flex-direction: column;
+    text-align: center;
+    min-height: auto;
+    padding-bottom: 6em;
+  }
+
+  .column3 {
+    flex: none;
+    width: 100%;
+    padding: 0 20px;
+    order: 1; /* Asegura que la imagen aparezca primero */
+    justify-content: center;
+  }
+
+  .column4 {
+    flex: none;
+    width: 100%;
+    padding: 0 20px;
+    order: 2; /* Asegura que el texto aparezca después */
+  }
+
+  .girlHeadphones {
+    position: static;
+    max-height: 114vh;
+    max-width: 87vh;
+    margin-bottom: 20px;
+  }
+
+  .listenTitle,
+  .whereTitle {
+    font-size: 2rem;
+  }
+
+  .listenParagraph {
+    font-size: 0.9rem;
+  }
+
+  /* Sección 4 */
+  .cardSection {
+    margin: 20px 10px;
+    margin-top: -50px;
+    padding: 20px;
+  }
+
+  .moreTitle,
+  .questionsTitle {
+    font-size: 2rem;
+  }
+
+  .contactButton {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Móviles pequeños (max-width: 480px) */
+@media (max-width: 480px) {
+  .containerConocenos {
+    padding-top: 50px;
+  }
+
+  /* Sección 1 */
+  .firstSection {
+    padding: 15px 0;
+  }
+
+  .column1 {
+    padding: 0 15px;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .manSinging {
+    max-height: 250px;
+  }
+
+  /* Sección 2 */
+  .secondSection {
+    padding: 74px 15px;
+  }
+
+  .sectionTitle {
+    font-size: 1.3rem;
+  }
+
+  .sectionParagraph {
+    font-size: 0.85rem;
+  }
+
+  /* Sección 3 */
+
+  .girlHeadphones {
+    max-height: 76vh;
+  }
+
+  .listenTitle,
+  .whereTitle {
+    font-size: 1.8rem;
+  }
+
+  .listenParagraph {
+    font-size: 0.85rem;
+  }
+
+  /* Sección 4 */
+  .cardSection {
+    margin: 15px 8px;
+    margin-top: -40px;
+    padding: 15px;
+  }
+
+  .moreTitle,
+  .questionsTitle {
+    font-size: 1.8rem;
+  }
+
+  .contactButton {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+  }
+}
