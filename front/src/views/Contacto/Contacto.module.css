@@ -1,0 +1,372 @@
+/* Conatcto.module.css */
+
+/* Importar fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Variables de fuentes */
+:root {
+  --font-tamil: 'Rock Salt', cursive;
+  --font-sans: 'Noto Sans', sans-serif;
+}
+
+.containerContacto {
+  width: 66%; /* Aumentar el ancho para que ocupe más espacio, como en la imagen */
+  max-width: 1200px; /* Limitar el ancho máximo */
+  min-height: 100vh;
+  padding: 20px;
+  margin: 40px auto; /* Centrar con márgenes más pequeños */
+  border-radius: 22px;
+  color: #000;
+  font-family: var(--font-sans);
+  background-color: #f5f5dc; /* Fondo beige claro como en la imagen */
+}
+
+/* Primera sección: "Contacto" */
+.firstContainer {
+    padding: 40px 68px;
+    text-align: start;
+}
+
+.firstTitle {
+  font-size: 2.4rem;
+  font-family: var(--font-tamil);
+  font-weight: bold;
+  margin-bottom: 20px;
+  letter-spacing: 9px;
+}
+
+.firstParrafo {
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: var(--font-sans);
+  letter-spacing: 1px;
+}
+
+/* Segunda sección: "¿Tenés una banda? ¿Hacés música?" */
+.secondContainer {
+  text-align: center;
+  padding: 20px 20px;
+}
+
+.secondTitle {
+  font-size: 2rem;
+  font-family: var(--font-tamil);
+  font-weight: normal;
+  margin-bottom: 10px;
+  letter-spacing: 4px;
+}
+
+.secondParrafo {
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: 800px;
+  margin: 0 auto;
+  letter-spacing: 1px;
+}
+
+/* Tercera sección: Columnas */
+.threeContainer {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px 20px;
+  flex-wrap: wrap;
+}
+
+/* Columna izquierda */
+.firstColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.firstImage img {
+  max-width: 100%;
+  height: 43vh; /* Reducir la altura para que sea más proporcional */
+  border-radius: 12px;
+}
+
+.secondImageContainer {
+  display: flex;
+  flex-direction: column; /* Cambiar a columna para apilar el QR y la info de contacto */
+  align-items: center;
+  gap: 10px;
+}
+
+.secondImage img {
+  width: 200px;
+  height: 200px;
+}
+
+.contactInfo {
+  text-align: center;
+}
+
+.scanMe {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.socialLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px; /* Espacio entre el enlace y el botón */
+}
+
+.socialIcon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #000;
+  text-decoration: none;
+}
+
+.mail {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.socialIcon svg {
+  font-size: 1.2rem;
+}
+
+.sendButtonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px; /* Espacio adicional para separar el botón del enlace */
+}
+
+.sendButton {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.sendButton:hover {
+  background-color: #333;
+}
+
+/* Columna derecha: Formulario */
+.formulario {
+  flex: 1;
+  max-width: 500px;
+}
+
+.cardForm {
+  width: 100%;
+}
+
+.cardForm form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.nameInput,
+.emailInput,
+.subjectInput,
+.messageInput {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: transparent;
+  font-size: 1rem;
+  color: #000;
+}
+
+.messageInput {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.submitButton {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #333;
+}
+
+.message {
+  margin-top: 10px;
+  color: #ffcc00;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Ajustes responsivos */
+
+/* Tablets (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .containerContacto {
+      width: 95%;
+      margin: 30px auto;
+      padding: 15px;
+    }
+  
+    .threeContainer {
+      gap: 20px;
+      padding: 30px 15px;
+      flex-direction: column; /* Apilar verticalmente en tabletas */
+      align-items: center;
+    }
+  
+    /* Cambiar el orden: formulario primero, luego firstColumn */
+    .formulario {
+      order: 1; /* Mover el formulario al principio */
+      max-width: 400px;
+      padding-left: 0; /* Quitar padding adicional */
+    }
+  
+    .firstColumn {
+      order: 2; /* Mover la columna con la guitarra y el QR al final */
+      max-width: 400px;
+      border-right: none; /* Quitar la línea divisoria */
+      padding-right: 0; /* Quitar padding adicional */
+    }
+  
+    .firstTitle,
+    .secondTitle {
+      font-size: 1.8rem;
+    }
+  
+    .firstParrafo,
+    .secondParrafo {
+      font-size: 0.95rem;
+    }
+  
+    .firstImage img {
+      height: 35vh;
+    }
+  }
+  
+/* Móviles (max-width: 768px) */
+@media (max-width: 768px) {
+    .containerContacto {
+      width: 100%;
+      margin: 20px auto;
+      padding: 10px;
+    }
+  
+    .threeContainer {
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 10px;
+    }
+  
+    /* Mantener el orden: formulario primero, luego firstColumn */
+    .formulario {
+      order: 1;
+      max-width: 100%;
+      padding-left: 0;
+    }
+  
+    .firstColumn {
+      order: 2;
+      max-width: 100%;
+      border-right: none;
+      padding-right: 0;
+    }
+  
+    .firstTitle,
+    .secondTitle {
+      font-size: 1.5rem;
+    }
+  
+    .firstParrafo,
+    .secondParrafo {
+      font-size: 0.9rem;
+    }
+  
+    .firstImage img {
+      height: 75vh;
+    }
+  
+    .secondImage img {
+       width: 376px;
+       height: auto;
+    }
+  
+    .nameInput,
+    .emailInput,
+    .subjectInput,
+    .messageInput {
+      font-size: 0.9rem;
+    }
+  
+    .submitButton,
+    .sendButton {
+      font-size: 0.9rem;
+      padding: 8px 16px;
+    }
+}
+  
+/* Móviles pequeños (max-width: 480px) */
+@media (max-width: 480px) {
+    .containerContacto {
+      margin: 10px auto;
+      padding: 5px;
+    }
+  
+    .firstTitle,
+    .secondTitle {
+      font-size: 1.3rem;
+    }
+  
+    .firstParrafo,
+    .secondParrafo {
+      font-size: 0.85rem;
+    }
+  
+    .firstImage img {
+      height: 66vh;
+    }
+  
+    .secondImage img {
+      width: 43vh;
+      height: auto;
+    }
+  
+    .nameInput,
+    .emailInput,
+    .subjectInput,
+    .messageInput {
+      font-size: 0.85rem;
+    }
+  
+    .submitButton,
+    .sendButton {
+      font-size: 0.85rem;
+      padding: 6px 12px;
+    }
+  
+    .scanMe,
+    .mail {
+      font-size: 0.8rem;
+    }
+  
+    .socialIcon svg {
+      font-size: 1rem;
+    }
+}
