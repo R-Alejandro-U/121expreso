@@ -3,8 +3,9 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 1em 2em 4em 2.7em;
-    margin: 13px 15px 18px 32px;
+    padding: 1em 2em 4em 8em;
+    margin: 13px 15px 18px 0;
+    /* margin-left: 5.8em; */
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
