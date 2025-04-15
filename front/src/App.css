@@ -93,6 +93,19 @@
   background-color: #e60000;
 }
 
+.off-radio-button{
+  background-color: #3f3d3d;
+  color: #ffffff;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+};
+
 .wave-icon {
   display: inline-block;
 }
