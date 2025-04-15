@@ -18,7 +18,7 @@ export const UserProvider = ({children}: {children: React.ReactNode}) => {
     const loginUser = async(LoginUser: DataLogin): Promise<IUser> => {
         try {
             const { data } = await axios.post<ILoginResponse>('https://one21expreso.onrender.com/auth/signin', LoginUser)
-            localStorage.setItem("user", data.user.id);
+            localStorage.setItem("user", JSON.stringify(data.user));
             localStorage.setItem("token", data.token);
             return data.user;
         } catch ({ response } : any) {
