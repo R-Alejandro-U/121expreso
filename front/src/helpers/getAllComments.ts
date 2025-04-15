@@ -1,13 +1,13 @@
+// src/helpers/getAllComments.ts
 import axios, { AxiosError } from 'axios';
 
-// Definir la interfaz para un comentario devuelto por el backend
 interface CommentDTO {
   id: string;
   comment: string;
   user: string;
+  createdAt?: string;
 }
 
-// Definir la interfaz para la respuesta del backend
 interface GetCommentsResponse {
   comments: CommentDTO[];
   pagination_info: {
@@ -18,21 +18,20 @@ interface GetCommentsResponse {
   };
 }
 
-// Definir la interfaz para los datos que usará el componente ReviewCard
 export interface IReview {
   text: string;
   author: string;
   date: string;
 }
 
-const API_URL = 'http://localhost:5173/reseñas';
+const API_URL = '/comments'; // Debe ser /comments, no /api/comments
 
 export const getAllComments = async (page: number = 1, limit: number = 10): Promise<IReview[]> => {
   try {
     console.log('Solicitando comentarios desde el backend...');
     console.log(`URL completa: ${API_URL}?page=${page}&limit=${limit}`);
 
-    const { data } = await axios.get<GetCommentsResponse>(`${API_URL}`, {
+    const { data } = await axios.get<GetCommentsResponse>(API_URL, {
       params: {
         page,
         limit,
@@ -45,7 +44,8 @@ export const getAllComments = async (page: number = 1, limit: number = 10): Prom
     });
 
     if (!data.comments?.length) {
-      throw new Error('No se encontraron comentarios.');
+      console.warn('No se encontraron comentarios.');
+      return [];
     }
 
     return data.comments.map((comment: CommentDTO) => {
@@ -56,23 +56,31 @@ export const getAllComments = async (page: number = 1, limit: number = 10): Prom
       return {
         text: comment.comment,
         author: comment.user,
-        date: 'Fecha no disponible',
+        date: comment.createdAt
+          ? new Date(comment.createdAt).toLocaleDateString('es-ES', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+            })
+          : 'Fecha no disponible',
       };
     });
-  } catch (error: unknown) { // Tipar explícitamente como unknown
+  } catch (error: unknown) {
     if (error instanceof AxiosError) {
       console.error('Error al obtener los comentarios:', {
         message: error.message,
         status: error.response?.status,
         data: error.response?.data,
       });
-      throw new Error(`Error al obtener los comentarios: ${error.message}`);
+      throw new Error(
+        error.response?.data?.message || 'Error al obtener los comentarios'
+      );
     } else if (error instanceof Error) {
       console.error('Error general al obtener los comentarios:', error.message);
       throw error;
     } else {
       console.error('Error desconocido:', error);
-      throw new Error('Error desconocido al obtener los comentarios.');
+      throw new Error('Error desconocido al obtener los comentarios');
     }
   }
 };

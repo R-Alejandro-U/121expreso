@@ -1,11 +1,10 @@
-/* eslint-disable react-refresh/only-export-components */
-import React, { useState } from 'react';
+// src/components/Reseñas/Reseñas.tsx
+import React, { useState, useEffect } from 'react';
 import axios, { AxiosError } from 'axios';
 import styles from './Reseñas.module.css';
 import { ReviewCardProps } from '../../interfaces/IReviewProps';
-import { reviews } from '../../data/reviews';
+import { getAllComments, IReview } from '../../helpers/getAllComments';
 import Footer from '../../components/Footer/Footer';
-// import { getAllComments, IReview } from '../../helpers/getAllComments';
 
 const ReviewCard: React.FC<ReviewCardProps> = ({ text, author, date }) => (
   <div className={styles.reviewCard}>
@@ -16,34 +15,32 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ text, author, date }) => (
 );
 
 const Reseñas: React.FC = () => {
-  //const [reviews, setReviews] = useState<IReview[]>([]);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState<string | null>(null);
+  const [reviews, setReviews] = useState<IReview[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [newComment, setNewComment] = useState('');
   const [formData, setFormData] = useState({ username: '' });
   const [message, setMessage] = useState<string | null>(null);
 
-  // Cargar los comentarios cuando el componente se monta
-  // useEffect(() => {
-  //   const fetchComments = async () => {
-  //     try {
-  //       const comments = await getAllComments(1, 10);
-  //       setReviews(comments);
-  //     } catch (err: unknown) { // Tipar explícitamente como unknown
-  //       if (err instanceof Error) {
-  //         setError(err.message || 'Error al cargar los comentarios');
-  //       } else {
-  //         setError('Error desconocido al cargar los comentarios');
-  //       }
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const comments = await getAllComments(1, 10);
+        setReviews(comments);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message || 'Error al cargar los comentarios');
+        } else {
+          setError('Error desconocido al cargar los comentarios');
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  //   fetchComments();
-  // }, []);
+    fetchComments();
+  }, []);
 
-  // Manejar el envío de un nuevo comentario usando axios
   const handleSubmitComment = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -54,8 +51,8 @@ const Reseñas: React.FC = () => {
       }
 
       const response = await axios.post(
-        '/api/comments',
-        { comment: newComment },
+        '/comments', // Correcto: usa /comments
+        { comment: newComment, username: formData.username },
         {
           headers: {
             'Content-Type': 'application/json',
@@ -68,9 +65,11 @@ const Reseñas: React.FC = () => {
 
       setMessage(response.data.message);
       setNewComment('');
-      //const updatedComments = await getAllComments(1, 10);
-      //setReviews(updatedComments);
-    } catch (error: unknown) { // Tipar explícitamente como unknown
+      setFormData({ username: '' });
+
+      const updatedComments = await getAllComments(1, 10);
+      setReviews(updatedComments);
+    } catch (error: unknown) {
       if (error instanceof AxiosError) {
         console.error('Error al enviar el comentario:', {
           message: error.message,
@@ -88,17 +87,17 @@ const Reseñas: React.FC = () => {
     }
   };
 
-  // if (loading) {
-  //   return <div className={styles.containerReseñas}>Cargando reseñas...</div>;
-  // }
-
-  // if (error) {
-  //   return <div className={styles.containerReseñas}>Error: {error}</div>;
-  // }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  if (loading) {
+    return <div className={styles.containerReseñas}>Cargando reseñas...</div>;
+  }
+
+  if (error) {
+    return <div className={styles.containerReseñas}>Error: {error}</div>;
+  }
 
   return (
     <div className={styles.containerReseñas}>
@@ -106,19 +105,20 @@ const Reseñas: React.FC = () => {
         <div className={styles.cardForm}>
           <h2 className={styles.sectionTitle}>Dejá tu comentario</h2>
           <p className={styles.parrafoForm}>
-          ¿Te gusta #121expreso o alguno de mis programas anteriores?  
-          ¿querés dejar tú comentarío y ser parte de #121expreso como en los comentarios que vez abajo? (Sí son posta o... ¿no? pd: si no hay sé vos el primero.)
+            ¿Te gusta #121expreso o alguno de mis programas anteriores?  
+            ¿querés dejar tú comentarío y ser parte de #121expreso como en los comentarios que vez abajo? (Sí son posta o... ¿no? pd: si no hay sé vos el primero.)
           </p>
           <form onSubmit={handleSubmitComment}>
-          <input 
-          type="text" 
-          name="username" 
-          value={formData.username} 
-          onChange={handleChange} 
-          placeholder='Ex: Raul Alvarez'
-          className={styles.nameInput}
-          />
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              placeholder="Ex: Raul Alvarez"
+              className={styles.nameInput}
+            />
             <textarea
+              name="comment"
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="Escribe tu reseña..."
@@ -132,27 +132,6 @@ const Reseñas: React.FC = () => {
           {message && <p className={styles.message}>{message}</p>}
         </div>
       </section>
-
-      {/* <section className={styles.reviewsSection}>
-        <h2 className={styles.sectionTitle}>
-          RESEÑAS DE LOS OYENTES <br /> "LA MÚSICA NOS TRASLADA"
-        </h2>
-        <div className={styles.reviewsGrid}>
-          {reviews.length > 0 ? (
-            reviews.map((review, index) => (
-              <ReviewCard
-                key={index}
-                text={review.text}
-                author={review.author}
-                date={review.date}
-              />
-            ))
-          ) : (
-            <p>No hay reseñas disponibles.</p>
-          )}
-        </div>
-        <button className={styles.addCommentButton}>AGREGAR COMENTARIO</button>
-      </section> */}
 
       <section className={styles.reviewsSection}>
         <div className={styles.reviewsGrid}>
@@ -169,11 +148,16 @@ const Reseñas: React.FC = () => {
             <p>No hay reseñas disponibles.</p>
           )}
         </div>
-        <button className={styles.addCommentButton}>AGREGAR COMENTARIO</button>
+        <button
+          className={styles.addCommentButton}
+          onClick={() => document.querySelector(`.${styles.formulario}`)?.scrollIntoView({ behavior: 'smooth' })}
+        >
+          AGREGAR COMENTARIO
+        </button>
       </section>
 
       <div>
-        <Footer/>
+        <Footer />
       </div>
     </div>
   );
