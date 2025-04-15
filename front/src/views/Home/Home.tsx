@@ -11,7 +11,7 @@ import { ShowCardProps } from '../../interfaces/IShowProps';
 import { getAllShows, IProgramLite } from '../../helpers/getRadio';
 import Footer from '../../components/Footer/Footer';
 
-const ShowCard: React.FC<ShowCardProps> = ({ title, duration, date, image, url }) => {
+const ShowCard: React.FC<ShowCardProps> = ({ title, duration, image, url }) => {
   return (
     <div className={styles.showCard}>
       <img
@@ -22,7 +22,6 @@ const ShowCard: React.FC<ShowCardProps> = ({ title, duration, date, image, url }
       />
       <h3>{title}</h3>
       <p>{duration}</p>
-      <p>{date}</p>
       <a href={url} target="_blank" rel="noopener noreferrer" className={styles.listenButton}>
         Escuchar en Mixcloud
       </a>
@@ -121,12 +120,12 @@ const Home: React.FC = () => {
                 duration={show.duration}
                 date={show.date || 'Fecha no disponible'}
                 image={show.image}
-                url={show.url} // Usamos la url para redirigir a Mixcloud
+                url={show.url}
               />
             ))}
           </Slider>
         )}
-        <button className={styles.viewAllButton}>VER TODOS</button>
+        <a href="https://www.mixcloud.com/121expreso/"><button className={styles.viewAllButton}>VER TODOS</button></a>
       </section>
 
       <section className={styles.reviewsSection}>
