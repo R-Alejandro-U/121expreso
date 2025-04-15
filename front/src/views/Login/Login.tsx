@@ -7,6 +7,7 @@ import { UserContext } from '../../context/UserContext';
 import { DataLogin } from '../../components/Forms/Login/LoginForm.interface';
 import { validate } from '../../components/Forms/Login/utils/validate';
 import { IErrors } from '../../../utils/Errors.interface';
+import style from '../../components/Forms/Login/styles/Login.module.css';
 import Swal from 'sweetalert2';
 const Login: React.FC = () => {
   const { loginUser } = useContext(UserContext)
@@ -44,7 +45,9 @@ const Login: React.FC = () => {
     SetErrors(validate(Login));
   },[Login]);
   return(
-    <LoginForm data={ Login } change={ change } handleSubmit={ handleSubmit } errors={ Errors }></LoginForm>
+    <div id={style['page-login']}>
+      <LoginForm data={ Login } change={ change } handleSubmit={ handleSubmit } errors={ Errors }></LoginForm>
+    </div>
   );
 };
 
