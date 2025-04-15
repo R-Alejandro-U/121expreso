@@ -187,6 +187,8 @@
   text-align: center;
   margin-top: 60px; /* Espacio para el RadioMenu */
   margin-bottom: 60px; /* Espacio para el footer */
+  margin-left: 6.5em;
+  margin-right: 1em;
 }
 
 .sectionTitle {
