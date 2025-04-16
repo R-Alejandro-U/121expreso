@@ -1,4 +1,3 @@
-// src/components/Reseñas/Reseñas.tsx
 import React, { useState, useEffect } from 'react';
 import axios, { AxiosError } from 'axios';
 import styles from './Reseñas.module.css';
@@ -19,7 +18,6 @@ const Reseñas: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [newComment, setNewComment] = useState('');
-  const [formData, setFormData] = useState({ username: '' });
   const [message, setMessage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -27,14 +25,14 @@ const Reseñas: React.FC = () => {
       try {
         const comments = await getAllComments(1, 10);
         setReviews(comments);
+        setLoading(false);
       } catch (err: unknown) {
+        setLoading(false);
         if (err instanceof Error) {
           setError(err.message || 'Error al cargar los comentarios');
         } else {
           setError('Error desconocido al cargar los comentarios');
         }
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -43,6 +41,11 @@ const Reseñas: React.FC = () => {
 
   const handleSubmitComment = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (newComment.length < 4 || newComment.length > 500) {
+      setMessage('El comentario debe tener entre 4 y 500 caracteres.');
+      return;
+    }
+
     try {
       const token = localStorage.getItem('token');
       if (!token) {
@@ -51,8 +54,8 @@ const Reseñas: React.FC = () => {
       }
 
       const response = await axios.post(
-        '/comments', // Correcto: usa /comments
-        { comment: newComment, username: formData.username },
+        '/comment',
+        { comment: newComment },
         {
           headers: {
             'Content-Type': 'application/json',
@@ -65,8 +68,8 @@ const Reseñas: React.FC = () => {
 
       setMessage(response.data.message);
       setNewComment('');
-      setFormData({ username: '' });
 
+      // Actualizar la lista de comentarios
       const updatedComments = await getAllComments(1, 10);
       setReviews(updatedComments);
     } catch (error: unknown) {
@@ -87,10 +90,6 @@ const Reseñas: React.FC = () => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   if (loading) {
     return <div className={styles.containerReseñas}>Cargando reseñas...</div>;
   }
@@ -108,15 +107,7 @@ const Reseñas: React.FC = () => {
             ¿Te gusta #121expreso o alguno de mis programas anteriores?  
             ¿querés dejar tú comentarío y ser parte de #121expreso como en los comentarios que vez abajo? (Sí son posta o... ¿no? pd: si no hay sé vos el primero.)
           </p>
-          <form onSubmit={handleSubmitComment}>
-            <input
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              placeholder="Ex: Raul Alvarez"
-              className={styles.nameInput}
-            />
+          <form onSubmit={handleSubmitComment} className={styles.formReseñas}>
             <textarea
               name="comment"
               value={newComment}
