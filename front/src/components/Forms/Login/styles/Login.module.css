@@ -1,87 +1,204 @@
-/* src/views/Login/Login.css */
+/* src/components/Forms/Login/styles/Login.module.css */
 
-#page-login{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-height: 100vh;
-    max-width: 100vw;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    overflow-y: hidden;
+/* Importar fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Variables de fuentes */
+:root {
+  --font-tamil: 'Rock Salt', cursive;
+  --font-sans: 'Noto Sans', sans-serif;
 }
 
-form{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 100vw;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    overflow-y: hidden;
+#page-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
-.border{
-    background: #FEFFD4;
-    border-radius: 25px;
-    margin: 10em;
-    padding: 3em;
-    display: flex;
-    color: black;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: solid rgba(16, 16, 151, 0.507) 0.3em;
-    height: 23em;
-    width: 30em;
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
-.inputs div{
-    padding: 1em;
-    display: flex;
-    flex-direction: column;
+.border {
+  width: 55%;
+  max-width: 1207px;
+  padding: 68px 68px;
+  margin: 40px auto;
+  border-radius: 22px;
+  background-color: #f5f5dc;
+  color: #000;
+  font-family: var(--font-sans);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 }
 
-.inputs div p{
-    color: rgb(224, 48, 48);
+.title {
+  font-family: var(--font-tamil);
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  letter-spacing: 9px;
+  text-align: center;
+  color: #000;
 }
 
-.inputs div input{
-    border: solid black 0.5px;
-    border-radius: 25px;
-    margin: 4px 2px;
-    padding-left: 2em;
-    background-color: black;
-    color: white;
-    height: 2em;
-    width: auto;
+.subtitle {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #000;
 }
 
-.inputs div input::placeholder{
-    color: white;
+.inputs {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.buttons{
-    width: 100%;
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
+.inputs div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.inputs div input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: transparent;
+  font-size: 1rem;
+  color: #000;
+  font-family: var(--font-sans);
+}
+
+.inputs div input::placeholder {
+  color: #000;
+  font-family: var(--font-sans);
+}
+
+.inputs div p {
+  color: #f44336;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
 button {
-    border: solid transparent 1px; /* Reservamos espacio para el borde */
-    border-radius: 25px;
-    background-color: black;
-    color: #FEFFD4;
-    padding: 8px 16px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease;
 }
-  
+
 button:hover {
-    transition: 0.5s;
-    background-color: #FEFFD4;
-    border: solid black 1px; /* Solo cambiamos el color */
-    color: black;
+  background-color: #333;
+}
+
+/* Ajustes responsivos */
+
+/* Tablets (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .border {
+    width: 73%;
+    margin: 30px auto;
+    padding: 30px;
+  }
+
+  .inputs {
+    max-width: 400px;
+  }
+
+  .inputs div input {
+    font-size: 0.95rem;
+  }
+
+  .title {
+    font-size: 1.8rem;
+    letter-spacing: 6px;
+  }
+
+  button {
+    font-size: 0.95rem;
+    padding: 8px 16px;
+  }
+}
+
+/* Móviles (max-width: 768px) */
+@media (max-width: 768px) {
+  .border {
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  .inputs {
+    max-width: 100%;
+  }
+
+  .inputs div input {
+    font-size: 0.9rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    letter-spacing: 4px;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}
+
+/* Móviles pequeños (max-width: 480px) */
+@media (max-width: 480px) {
+  .border {
+    width: 95%;
+    margin: 10px auto;
+    padding: 15px;
+  }
+
+  .inputs div input {
+    font-size: 0.85rem;
+  }
+
+  .title {
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+  }
+
+  button {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
 }
