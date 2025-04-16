@@ -33,10 +33,9 @@
     background-color: antiquewhite;
     color: #000;
     text-align: center;
-    padding: 6em;
-    padding: 8em 5em;
+    padding: 6em 6em;
     text-align: start;
-    margin: 6em 25em;
+    margin: 6em 11em;
     /* margin-top: -100px; */
     border-radius: 10px;
     box-shadow: 0 12px 34px rgba(0, 0, 0, 0.7);
@@ -140,13 +139,18 @@
     color: #000;
 }
 
+.formReseñas {
+  display: flow-root;
+  min-height: auto;
+}
+
 
 /* Ajustes responsivos */
 
 /* Tablets (max-width: 1024px) */
 @media (max-width: 1024px) {
     .formulario {
-      margin: 4em 6em; /* Reducir márgenes laterales */
+      margin: 4em 3em 16px 159px; /* Reducir márgenes laterales */
       padding: 4em 3em; /* Reducir padding */
     }
   
@@ -173,7 +177,11 @@
     }
 
     .reviewsSection {
-        padding: 40px 25px;
+        padding: 45px 47px 5px 104px;
+    }
+
+    .formReseñas {
+      max-height: 22vh !important;
     }
   }
   

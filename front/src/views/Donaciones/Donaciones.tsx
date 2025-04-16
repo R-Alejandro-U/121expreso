@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Donaciones.module.css';
 import etiqueta from '../../assets/images/etiqueta-vintage.svg';
 import ticket from '../../assets/images/ticketY.svg';
+import Footer from '../../components/Footer/Footer';
 
 const Donaciones: React.FC = () => {
   // Función para redirigir al enlace de Cafecito
@@ -41,6 +42,10 @@ const Donaciones: React.FC = () => {
         <button className={styles.buttonDonar} onClick={handleDonate}>
           DONAR AHORA
         </button>
+      </div>
+
+      <div>
+        <Footer/>
       </div>
     </div>
   );

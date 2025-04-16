@@ -1,22 +1,5 @@
-// src/helpers/getAllComments.ts
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosError } from 'axios';
-
-interface CommentDTO {
-  id: string;
-  comment: string;
-  user: string;
-  createdAt?: string;
-}
-
-interface GetCommentsResponse {
-  comments: CommentDTO[];
-  pagination_info: {
-    current_items: number;
-    max_pages: number;
-    page: number;
-    total_items: number;
-  };
-}
 
 export interface IReview {
   text: string;
@@ -24,63 +7,25 @@ export interface IReview {
   date: string;
 }
 
-const API_URL = '/comments'; // Debe ser /comments, no /api/comments
-
-export const getAllComments = async (page: number = 1, limit: number = 10): Promise<IReview[]> => {
+export const getAllComments = async (page: number, limit: number): Promise<IReview[]> => {
   try {
-    console.log('Solicitando comentarios desde el backend...');
-    console.log(`URL completa: ${API_URL}?page=${page}&limit=${limit}`);
-
-    const { data } = await axios.get<GetCommentsResponse>(API_URL, {
-      params: {
-        page,
-        limit,
-      },
-      headers: {
-        'Content-Type': 'application/json',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        Accept: 'application/json',
-      },
-    });
-
-    if (!data.comments?.length) {
-      console.warn('No se encontraron comentarios.');
+    const response = await axios.get(`/comment?page=${page}&limit=${limit}`);
+    const { comments } = response.data.data;
+    return comments.map((comment: any) => ({
+      text: comment.comment,
+      author: comment.user,
+      date: comment.UpDateComment || new Date().toISOString(),
+    }));
+  } catch (error) {
+    if (
+      error instanceof AxiosError &&
+      error.response?.status === 404 &&
+      error.response?.data?.message === 'Sin comentarios en la base de datos.'
+    ) {
+      // Tratar el 404 como un caso de datos vacíos
       return [];
     }
-
-    return data.comments.map((comment: CommentDTO) => {
-      if (!comment.comment || !comment.user) {
-        throw new Error('Datos incompletos en uno de los comentarios.');
-      }
-
-      return {
-        text: comment.comment,
-        author: comment.user,
-        date: comment.createdAt
-          ? new Date(comment.createdAt).toLocaleDateString('es-ES', {
-              day: '2-digit',
-              month: '2-digit',
-              year: 'numeric',
-            })
-          : 'Fecha no disponible',
-      };
-    });
-  } catch (error: unknown) {
-    if (error instanceof AxiosError) {
-      console.error('Error al obtener los comentarios:', {
-        message: error.message,
-        status: error.response?.status,
-        data: error.response?.data,
-      });
-      throw new Error(
-        error.response?.data?.message || 'Error al obtener los comentarios'
-      );
-    } else if (error instanceof Error) {
-      console.error('Error general al obtener los comentarios:', error.message);
-      throw error;
-    } else {
-      console.error('Error desconocido:', error);
-      throw new Error('Error desconocido al obtener los comentarios');
-    }
+    console.error('Error al obtener los comentarios:', error);
+    throw error;
   }
 };

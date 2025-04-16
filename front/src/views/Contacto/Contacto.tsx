@@ -33,7 +33,7 @@ const Contacto: React.FC = () => {
       }
 
       const response = await axios.post(
-        '/api/contact',
+        '/contact',
         {
           username: formData.username,
           email: formData.email,
@@ -123,7 +123,7 @@ const Contacto: React.FC = () => {
       </div>
 
           <div className={styles.cardForm}>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className={styles.formContacto}>
               <input
                 type="text"
                 name="username"

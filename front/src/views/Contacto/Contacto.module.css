@@ -320,6 +320,10 @@
       font-size: 0.9rem;
       padding: 8px 16px;
     }
+
+    .formContacto {
+      min-height: 20vh;
+    }
 }
   
 /* Móviles pequeños (max-width: 480px) */
