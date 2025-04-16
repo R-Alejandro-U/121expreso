@@ -14,7 +14,6 @@
 .donacionesContainer {
   width: 100%;
   min-height: 100vh;
-  padding: 40px 20px;
   background: url('https://www.transparenttextures.com/patterns/stardust.png') repeat, #1a1a40; /* Fondo estrellado */
   color: #fff;
   display: flex;
@@ -107,6 +106,7 @@
 .buttonDonaciones {
   display: flex;
   justify-content: center;
+  margin-bottom: 4em;
 }
 
 .buttonDonar {
@@ -135,7 +135,7 @@
   }
 
   .etiquetaImage {
-    max-width: 180px;
+    max-width: 40vh;
   }
 
   .cafecito {
@@ -153,9 +153,6 @@
 
 /* Móviles (max-width: 768px) */
 @media (max-width: 768px) {
-  .donacionesContainer {
-    padding: 30px 15px;
-  }
 
   .title {
     font-size: 1.8rem;
@@ -167,7 +164,7 @@
   }
 
   .etiquetaImage {
-    max-width: 150px;
+    max-width: 40vh;
   }
 
   .cafecito {
@@ -190,16 +187,12 @@
 
 /* Móviles pequeños (max-width: 480px) */
 @media (max-width: 480px) {
-  .donacionesContainer {
-    padding: 20px 10px;
-  }
-
   .title {
     font-size: 1.5rem;
   }
 
   .etiquetaImage {
-    max-width: 120px;
+    max-width: 36vh;
   }
 
   .cafecito {
@@ -215,7 +208,7 @@
   }
 
   .buttonDonar {
-    padding: 6px 20px;
+    padding: 1em 9em;
     font-size: 0.85rem;
   }
 }

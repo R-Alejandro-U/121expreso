@@ -142,13 +142,18 @@
 
   /* Ajustamos la posición y z-index del footer en modo móvil */
   .app-footer {
-    bottom: 60px; /* Justo por encima del RadioMenu (60px) */
+    bottom: 84px; /* Justo por encima del RadioMenu (60px) */
     z-index: 800; /* Menor que el RadioMenu en móvil (850) */
+    height: 8.39%;
   }
 
   .radio-menu {
     height: 60px;
     z-index: 850; /* Asegura que el RadioMenu esté por encima del footer en móvil */
+  }
+
+  .logo-image {
+    height: 41px;
   }
 }
 

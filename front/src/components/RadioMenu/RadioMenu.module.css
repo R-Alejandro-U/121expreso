@@ -200,7 +200,7 @@
   bottom: 0;
   top: auto;
   width: 100%;
-  height: 60px;
+  height: 84px;
   background: var(--menu-background);
   z-index: 850;
 }
@@ -217,7 +217,7 @@
 .radio-menu.mobile .menu-item {
   flex-direction: column;
   justify-content: center;
-  padding: 5px 0;
+  padding: 6px 11px;
   margin: 0;
   flex: 1;
 }
