@@ -71,31 +71,33 @@ const RadioMenu: React.FC<RadioMenuProps> = ({ onMenuToggle }) => {
         </button>
       )}
 
-      <motion.div
-        className={`${styles['menu-container']} ${isExpanded ? styles.expanded : ''}`}
-        initial="expanded"
-        animate={isExpanded ? 'expanded' : 'collapsed'}
-        variants={menuVariants}
-        // style={{ background: 'blue' }} // Comentamos el estilo inline para probar los estilos del CSS
-      >
-        {menuItems.map((item) => (
-          <div className={styles['menu-item-wrapper']} key={item.id}>
-            <NavLink
-              to={item.path}
-              className={({ isActive }) =>
-                isActive
-                  ? `${styles['menu-item']} ${styles.active}`
-                  : styles['menu-item']
-              }
-            >
-              <span className={styles['menu-icon']}>{item.icon}</span>
-              {(isMobile || isExpanded) && (
-                <span className={styles['menu-text']}>{item.title}</span>
-              )}
-            </NavLink>
-          </div>
-        ))}
-      </motion.div>
+      <div className={styles['separation']}>
+        <motion.div
+          className={`${styles['menu-container']} ${isExpanded ? styles.expanded : ''}`}
+          initial="expanded"
+          animate={isExpanded ? 'expanded' : 'collapsed'}
+          variants={menuVariants}
+          // style={{ background: 'blue' }} // Comentamos el estilo inline para probar los estilos del CSS
+        >
+          {menuItems.map((item) => (
+            <div className={styles['menu-item-wrapper']} key={item.id}>
+              <NavLink
+                to={item.path}
+                className={({ isActive }) =>
+                  isActive
+                    ? `${styles['menu-item']} ${styles.active}`
+                    : styles['menu-item']
+                }
+              >
+                <span className={styles['menu-icon']}>{item.icon}</span>
+                {(isMobile || isExpanded) && (
+                  <span className={styles['menu-text']}>{item.title}</span>
+                )}
+              </NavLink>
+            </div>
+          ))}
+        </motion.div>
+      </div>
     </div>
   );
 };

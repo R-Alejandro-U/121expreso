@@ -12,6 +12,7 @@ import Registro from './views/Registro/Registro';
 import RadioMenu from './components/RadioMenu/RadioMenu';
 import Reseñas from './views/Reseñas/Reseñas';
 import logo from "./assets/banner.svg"
+import RadioPlayer from './components/Radio/Radio';
 
 const App: React.FC = () => {
   const { user } = useContext(UserContext);
@@ -85,19 +86,7 @@ const App: React.FC = () => {
                 Iniciar Sesión
               </button>
             )}
-            <button className="live-radio-button">
-              RADIO EN VIVO
-              <div className="wave-icon">
-                <svg viewBox="0 0 24 8" width="24" height="8">
-                  <path
-                    d="M0,4 C2,0 4,8 6,4 C8,0 10,8 12,4 C14,0 16,8 18,4 C20,0 22,8 24,4"
-                    stroke="#ffffff"
-                    strokeWidth="1.5"
-                    fill="none"
-                  />
-                </svg>
-              </div>
-            </button>
+            <RadioPlayer />
           </div>
         </footer>
       )}

@@ -1,22 +1,33 @@
 /* Contenedor principal */
 .radio-app {
   min-height: 100vh;
-  color: #ffffff;
   font-family: 'Arial', sans-serif;
 }
 
 /* Contenido principal */
 .app-content {
-  padding-left: 60px;
+  padding-top: 0; 
   padding-bottom: 60px;
   transition: padding-left 0.3s ease;
   box-sizing: border-box;
   z-index: 1;
 }
 
-/* .radio-app.menu-expanded .app-content {
-  padding-left: 229px;
-} */
+/* Estilos para el RadioMenu */
+.radio-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #000; /* Ajusta según tu diseño */
+  z-index: 1000; /* Más alto que el footer y el contenido */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
 
 /* Footer */
 .app-footer {
@@ -29,8 +40,10 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 911; /* Alto en escritorio */
+  height: 12.39%; /* Altura fija para el footer */
+  z-index: 911; /* Alto en escritorio, pero menor que el RadioMenu */
   box-sizing: border-box;
+  border-top: 1px solid;
 }
 
 .footer-left {
@@ -80,10 +93,22 @@
   background-color: #e60000;
 }
 
+.off-radio-button{
+  background-color: #3f3d3d;
+  color: #ffffff;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+};
+
 .wave-icon {
   display: inline-block;
 }
-
 
 .social-icon {
   width: 30px;
@@ -111,16 +136,16 @@
 }
 
 .logo-image img {
-  width: 24px; /* Ajusta el tamaño de la imagen */
+  width: 24px;
   height: 24px;
-  object-fit: contain; /* Asegura que la imagen no se distorsione */
+  object-fit: contain;
 }
 
 /* Media queries para modo móvil */
 @media (max-width: 768px) {
   .app-content {
     padding-left: 0;
-    padding-top: 0;
+    padding-top: 0px; /* Espacio para el RadioMenu */
     padding-bottom: 120px; /* Espacio para el footer (60px) + RadioMenu (60px) */
   }
 
@@ -130,12 +155,20 @@
 
   /* Ajustamos la posición y z-index del footer en modo móvil */
   .app-footer {
-    bottom: 60px; /* Justo por encima del RadioMenu (60px) */
+    bottom: 84px; /* Justo por encima del RadioMenu (60px) */
     z-index: 800; /* Menor que el RadioMenu en móvil (850) */
+    height: 8.39%;
+  }
+
+  .radio-menu {
+    height: 60px;
+    z-index: 850; /* Asegura que el RadioMenu esté por encima del footer en móvil */
+  }
+
+  .logo-image {
+    height: 41px;
   }
 }
-
-
 
 .card {
   padding: 2em;

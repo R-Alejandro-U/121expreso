@@ -32,12 +32,16 @@
 
 /* Contenedor principal y botón de toggle */
 .radio-menu {
+  background-color: rgba(64, 88, 109, 0.9);
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 87.6%;
   z-index: 900;
   display: flex;
+  border-right: 1px solid;
+  border-top: 1px solid;
+  justify-content: center;
 }
 
 .menu-toggle {
@@ -69,14 +73,19 @@
 
 /* Contenedor del menú */
 .menu-container {
-  background: var(--menu-background);
-  height: 151vh;
-  width: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  transition: width 0.3s ease;
+  margin: 5em 0;
+}
+
+.separation {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 12em;
-  transition: width 0.3s ease;
+  justify-content: center;
 }
 
 .menu-container.expanded {
@@ -191,7 +200,7 @@
   bottom: 0;
   top: auto;
   width: 100%;
-  height: 60px;
+  height: 84px;
   background: var(--menu-background);
   z-index: 850;
 }
@@ -208,7 +217,7 @@
 .radio-menu.mobile .menu-item {
   flex-direction: column;
   justify-content: center;
-  padding: 5px 0;
+  padding: 6px 11px;
   margin: 0;
   flex: 1;
 }

@@ -1,5 +1,7 @@
 export interface ShowCardProps {
-    title: string;
-    duration: string;
-    image: string;
+  title: string;
+  duration: string;
+  date: string;
+  image: string;
+  url: string;
 }
