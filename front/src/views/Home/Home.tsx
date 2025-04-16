@@ -86,7 +86,7 @@ const Home: React.FC = () => {
       </video>
       <div className={styles.header}>
         <img src={logo} alt="Logo Home" className={styles.logoHome} />
-        <p className={styles.subtitle}>la música es ese lugar donde quieres estar</p>
+        <p className={styles.subtitle}>la música es ese lugar en donde querés estar</p>
       </div>
       <div className={styles.content}>
         <div className={styles.card}>

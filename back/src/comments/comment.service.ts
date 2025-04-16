@@ -54,7 +54,7 @@ export const commentService = {
                 languages: ['es', 'en'],
                 requestedAttributes: { TOXICITY: {} },
             });
-            if (data.attributeScores.TOXICITY.summaryScore.value >= 0.7) throw new Error('Este comentario es muy ofensivo y no será guardado.');
+            if (data.attributeScores.TOXICITY.summaryScore.value >= 0.4) throw new Error('Este comentario es muy ofensivo y no será guardado.');
             await commentModel.save({ comment, user });
             return `Se ha guardado con éxito el comentario. Gracias por participar ${user.name}.`;
         } catch (error) {
