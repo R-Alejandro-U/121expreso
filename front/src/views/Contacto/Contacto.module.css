@@ -171,8 +171,10 @@
 
 .cardForm form {
   display: flex;
+  gap: 20px;
   flex-direction: column;
-  gap: 15px;
+  justify-content: normal;
+  min-height: auto;
 }
 
 .nameInput,
@@ -215,12 +217,24 @@
   text-align: center;
 }
 
+
+/* MENSAJES DE FORMULARIO DE CONTACTO */
+.successMessage {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.errorMessage {
+  color: #f44336;
+  font-weight: bold;
+}
+
 /* Ajustes responsivos */
 
 /* Tablets (max-width: 1024px) */
 @media (max-width: 1024px) {
     .containerContacto {
-      width: 95%;
+      width: 73%;
       margin: 30px auto;
       padding: 15px;
     }
@@ -244,6 +258,7 @@
       max-width: 400px;
       border-right: none; /* Quitar la línea divisoria */
       padding-right: 0; /* Quitar padding adicional */
+      flex-direction: row;
     }
   
     .firstTitle,
@@ -287,6 +302,7 @@
       max-width: 100%;
       border-right: none;
       padding-right: 0;
+      flex-direction: column;
     }
   
     .firstTitle,

@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import styles from './Contacto.module.css'; // Asegúrate de que el nombre del archivo sea correcto (parece que hay un typo: "Conatcto" debería ser "Contacto")
-import { FaEnvelope } from 'react-icons/fa'; // Cambiar a FaEnvelope para un ícono de correo más genérico
+import React, { useState, useRef } from 'react';
+import styles from './Contacto.module.css';
+import { FaEnvelope } from 'react-icons/fa';
 import guitar from '../../assets/images/guitar.svg';
 import qr from '../../assets/images/qr-expreso.svg';
-import axios, { AxiosError } from 'axios';
+import emailjs from '@emailjs/browser';
+
 
 const Contacto: React.FC = () => {
+  const form = useRef<HTMLFormElement>(null);
   // Estado para los campos del formulario
   const [formData, setFormData] = useState({
     username: '',
@@ -14,6 +16,7 @@ const Contacto: React.FC = () => {
     message: '',
   });
   const [message, setMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   // Manejar cambios en los campos del formulario
   const handleChange = (
@@ -22,52 +25,46 @@ const Contacto: React.FC = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Enviar el formulario
+  // Enviar el formulario usando EmailJS
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    setMessage(null);
+    
     try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        setMessage('Debes iniciar sesión para enviar un mensaje.');
-        return;
+      // Usar las variables de entorno para las credenciales de EmailJS
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+      
+      // Verificar que las variables de entorno estén definidas
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error('Las credenciales de EmailJS no están configuradas correctamente');
       }
-
-      const response = await axios.post(
-        '/contact',
-        {
-          username: formData.username,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-            Accept: 'application/json',
-          },
+      
+      if (form.current) {
+        const result = await emailjs.sendForm(
+          serviceId,
+          templateId,
+          form.current,
+          publicKey
+        );
+        
+        if (result.text === 'OK') {
+          setMessage('¡Mensaje enviado con éxito! Gracias por contactarnos.');
+          // Limpiar el formulario
+          setFormData({ username: '', email: '', subject: '', message: '' });
         }
-      );
-
-      setMessage(response.data.message || 'Mensaje enviado con éxito');
-      // Limpiar el formulario
-      setFormData({ username: '', email: '', subject: '', message: '' });
-    } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        console.error('Error al enviar el mensaje:', {
-          message: error.message,
-          status: error.response?.status,
-          data: error.response?.data,
-        });
-        setMessage(error.response?.data?.message || 'Error al enviar el mensaje');
-      } else if (error instanceof Error) {
-        console.error('Error general al enviar el mensaje:', error.message);
-        setMessage(error.message || 'Error al enviar el mensaje');
-      } else {
-        console.error('Error desconocido:', error);
-        setMessage('Error desconocido al enviar el mensaje');
       }
+    } catch (error) {
+      console.error('Error al enviar el mensaje:', error);
+      if (error instanceof Error) {
+        setMessage(`Error al enviar el mensaje: ${error.message}`);
+      } else {
+        setMessage('Error al enviar el mensaje. Por favor intenta nuevamente.');
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -79,8 +76,6 @@ const Contacto: React.FC = () => {
           Si necesitas más información, ¡no dudes en ponerte en contacto con nosotros! Podés utilizar nuestro formulario de contacto online o comunicarte directamente a través de correo electrónico, teléfono o redes sociales.
         </p>
       </div>
-
-
 
       <div className={styles.threeContainer}>
         <div className={styles.firstColumn}>
@@ -109,21 +104,19 @@ const Contacto: React.FC = () => {
                 </a>
               </div>
             </div>
-
           </div>
         </div>
 
         <div className={styles.formulario}>
-
-        <div className={styles.secondContainer}>
-        <h2 className={styles.secondTitle}>¿Tenés una banda? ¿Hacés música?</h2>
-        <p className={styles.secondParrafo}>
-          Contactate con #121expreso y difundi tú música. Ah! Es gratis eh?
-        </p>
-      </div>
+          <div className={styles.secondContainer}>
+            <h2 className={styles.secondTitle}>¿Tenés una banda? ¿Hacés música?</h2>
+            <p className={styles.secondParrafo}>
+              Contactate con #121expreso y difundi tú música. Ah! Es gratis eh?
+            </p>
+          </div>
 
           <div className={styles.cardForm}>
-            <form onSubmit={handleSubmit} className={styles.formContacto}>
+            <form ref={form} onSubmit={handleSubmit} className={styles.formContacto}>
               <input
                 type="text"
                 name="username"
@@ -159,15 +152,25 @@ const Contacto: React.FC = () => {
                 required
                 className={styles.messageInput}
               />
-              <button type="submit" className={styles.submitButton}>
-                ENVIAR
+              <button 
+                type="submit" 
+                className={styles.submitButton}
+                disabled={loading}
+              >
+                {loading ? 'ENVIANDO...' : 'ENVIAR'}
               </button>
             </form>
-            {message && <p className={styles.message}>{message}</p>}
+            {message && (
+              <p className={`${styles.message} ${message.includes('Error') ? styles.errorMessage : styles.successMessage}`}>
+                {message}
+              </p>
+            )}
           </div>
         </div>
       </div>
+
     </div>
+    
   );
 };
 
