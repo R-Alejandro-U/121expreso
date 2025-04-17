@@ -54,7 +54,7 @@ const Reseñas: React.FC = () => {
       }
 
       const response = await axios.post(
-        '/comment',
+        'https://one21expreso.onrender.com/comment',
         { comment: newComment },
         {
           headers: {
@@ -73,6 +73,7 @@ const Reseñas: React.FC = () => {
       const updatedComments = await getAllComments(1, 10);
       setReviews(updatedComments);
     } catch (error: unknown) {
+      console.log(error)
       if (error instanceof AxiosError) {
         console.error('Error al enviar el comentario:', {
           message: error.message,
@@ -90,13 +91,13 @@ const Reseñas: React.FC = () => {
     }
   };
 
-  if (loading) {
-    return <div className={styles.containerReseñas}>Cargando reseñas...</div>;
-  }
+  // if (loading) {
+  //   return <div className={styles.containerReseñas}>Cargando reseñas...</div>;
+  // }
 
-  if (error) {
-    return <div className={styles.containerReseñas}>Error: {error}</div>;
-  }
+  // if (error) {
+  //   return <div className={styles.containerReseñas}>Error: {error}</div>;
+  // }
 
   return (
     <div className={styles.containerReseñas}>

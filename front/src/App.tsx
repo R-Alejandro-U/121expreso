@@ -79,7 +79,7 @@ const App: React.FC = () => {
           </div>
           <div className="footer-right">
             {user.user ? (
-              <button onClick={logOut}>Cerrar Sesión</button>
+              <button className="login-button"  onClick={logOut}>Cerrar Sesión</button>
             ) : (
               <button
                 className="login-button"
