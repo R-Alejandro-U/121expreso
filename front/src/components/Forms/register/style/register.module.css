@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --font-tamil: 'Rock Salt', 'cursive';
+  --font-sans: 'Noto Sans', sans-serif;
+}
+
+.form{
+    min-height: 100vh;
+    max-height: 100vh;
+    padding-bottom: 2.9em;
+}
+
+legend {
+    font-family: 'Rock Salt';
+    font-size: 3em;
+}
+
+label {
+    font-family: 'Noto Sans';
+    font-size: 1.5em;
+}
+
+input {
+    border-radius: 25px;
+    border: none;
+    padding: 0.6em 0.5em;
+}
+
+.border{
+    background-color: rgb(211, 204, 196);
+    margin: 10em;
+    padding: 3em;
+    display: flex;
+    color: black;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid rgba(16, 16, 151, 0.507) 0.3em;
+    border-radius: 25px;
+    width: 30em;
+    gap: 1em;
+    height: 35em;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    border-radius: 50px;
+    color: black;
+    margin: 0 1em;
+    width: 16em;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 2em;
+};

@@ -1,8 +1,9 @@
 import React from 'react';
+import { RegisterForm } from '../../components/Forms/register/RegisterForm';
 
 const Registro: React.FC = () => {
   return (
-    <div>Registro Page</div>
+    <RegisterForm />
   );
 };
 

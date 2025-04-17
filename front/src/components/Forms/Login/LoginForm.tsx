@@ -1,8 +1,9 @@
 import { ILoginFormProps } from "./LoginForm.interface";
 import styles from '../Login/styles/Login.module.css';
 import { Link } from "react-router-dom";
+import React from 'react';
 
-export const LoginForm = ({data: { email, password }, change, handleSubmit, errors}: ILoginFormProps) => {
+export const LoginForm: React.FC<ILoginFormProps> = ({data: { email, password }, change, handleSubmit, errors}: ILoginFormProps) => {
     return(
         <form onSubmit={handleSubmit}>
             <fieldset className={styles.border}>
@@ -37,7 +38,7 @@ export const LoginForm = ({data: { email, password }, change, handleSubmit, erro
                         <button type="submit">Iniciar sesión</button>
                     </div>
                     <div>
-                        <Link to={'/register'}><button>Registrarse</button></Link>
+                        <Link to={'/registro'}><button>Registrarse</button></Link>
                     </div>
                 </div>
             </fieldset>
