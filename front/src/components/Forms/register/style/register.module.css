@@ -12,6 +12,11 @@
     padding-bottom: 2.9em;
 }
 
+.form p {
+    color: red;
+    font-size: 0.8em;
+}
+
 legend {
     font-family: 'Rock Salt';
     font-size: 3em;
