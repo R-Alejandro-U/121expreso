@@ -13,17 +13,19 @@ export const UserContext = createContext<any>({
     logOut: () => {},
 });
 
+interface user {
+    user: string | null
+}
+
 export const UserProvider = ({children}: {children: React.ReactNode}) => {
-    const [user, setUser] = useState<string | null>(() => {
-        const storedUser = localStorage.getItem("user");
-        return storedUser ? storedUser : null;
+    const [user, setUser] = useState<user>({
+        user: null,
     });
     const signup = async (newUser: IRegister): Promise<string> => {
         try {
             const { data } = await axios.post<ISignUpResponse>('https://one21expreso.onrender.com/auth/signup', newUser);
             return data.message; 
         } catch ({ response }: any) {
-            console.log(response);
             throw response.data;
         }
     };
@@ -32,16 +34,16 @@ export const UserProvider = ({children}: {children: React.ReactNode}) => {
             const { data } = await axios.post<ILoginResponse>('https://one21expreso.onrender.com/auth/signin', LoginUser)
             localStorage.setItem("user", JSON.stringify(data.user));
             localStorage.setItem("token", data.token);
+            setUser({user: data.user.id})
             return data.user;
         } catch ({ response } : any) {
-            console.error(response.data);
             throw response.data;
         };
     };
     const logOut = () => {
         localStorage.removeItem("user")
         localStorage.removeItem("token")
-        setUser(null)
+        setUser({user: null})
     };
     const value = {
         user,
