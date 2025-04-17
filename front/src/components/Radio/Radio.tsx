@@ -30,7 +30,7 @@ const RadioPlayer: React.FC = () => {
         Tu navegador no soporta audio.
       </audio>
       <div>
-        <button className={isPlaying ? styles["live-radio-button"] : styles["off-radio-button"]} onClick={toglePlay}>
+        <button className={isPlaying ? styles["live-radio"] : styles["off-radio"]} onClick={toglePlay}>
             { !isPlaying && <img src={play} className='playing'></img>}
             RADIO EN VIVO
             <div className="wave-icon">

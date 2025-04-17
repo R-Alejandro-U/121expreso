@@ -64,4 +64,78 @@ input {
     align-items: center;
     width: 100%;
     gap: 2em;
-};
+}
+
+.buttons button{
+    padding: 0.5em 2em;
+    border: none;
+    border-radius: 25px;
+    color: aliceblue;
+    background-color: black;
+}
+
+/* Teléfonos (< 600px) */
+@media (max-width: 768px) {
+    .border {
+      margin: 0.5rem;
+      padding: 1.5rem;
+      min-height: 18rem;
+      border-radius: 15px;
+    }
+  
+    .title {
+      font-size: 2rem;
+    }
+  
+    .inputs {
+      max-width: 100%;
+    }
+  
+    .inputs label {
+      font-size: 1rem;
+    }
+  
+    .inputs input {
+      font-size: 0.9rem;
+      padding: 0.5rem 0.8rem;
+    }
+  
+    .buttons {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  
+    .buttons button {
+      width: 80%;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+  
+  /* Tablets (601px - 900px) */
+  @media (max-width: 1024px) {
+    .border {
+      margin: 1rem;
+      padding: 2rem;
+      min-height: 20rem;
+      width: 80%;
+    }
+  
+    .title {
+      font-size: 2.3rem;
+    }
+  
+    .inputs input {
+      font-size: 1rem;
+    }
+  
+    .buttons {
+      gap: 1rem;
+      flex-direction: row;
+    }
+  
+    .buttons button {
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+    }
+  }

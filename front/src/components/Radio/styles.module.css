@@ -1,33 +1,37 @@
-.live-radio-button,
-.live-button {
-  background-color: #ff0000;
-  color: #ffffff;
-  border: none;
-  padding: 1em 2em;
-  border-radius: 20px;
+.live-radio{
+  background: red;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  gap: 0.5em;
+  height: 2.5em;
+  border-radius: 25px;
+  transition: 0.5s;
+  padding: 1em 2em;
+  border: none;
 }
 
-.live-radio-button:hover,
-.live-button:hover {
-  background-color: #e60000;
+.live-radio:hover {
+  border: solid 1px blanchedalmond;
+  transition: 0.3s;
+  background-color: rgb(161, 32, 32);
 }
 
-.off-radio-button{
-  background-color: #ffffff;
-  color: #000000;
-  border: none;
-  padding: 1em 2em;
-  border-radius: 20px;
+.off-radio{
+  background: rgb(255, 255, 255);
+  color: black;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 15em;
-  height: 3em;
-};
+  gap: 0.5em;
+  height: 2.5em;
+  border-radius: 25px;
+  border: none;
+  padding: 1em;
+  transition: 0.5s;
+}
+
+.off-radio:hover {
+  border: solid 1px black;
+  background-color: antiquewhite;
+}

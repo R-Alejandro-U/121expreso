@@ -36,12 +36,12 @@ const App: React.FC = () => {
       location.pathname.startsWith(route)
     );
 
-    if (!user && isAttemptingProtectedRoute) {
+    if (!user.user && isAttemptingProtectedRoute) {
       navigate('/login');
-    } else if (user && ['/login', '/register'].includes(location.pathname)) {
+    } else if (user.user && ['/login', '/register'].includes(location.pathname)) {
       navigate('/');
     }
-  }, [location.pathname, navigate, user]);
+  }, [location.pathname, navigate, protectedRoutes, user.user]);
 
   const shouldShowMenu = routesWithMenu.some((route) =>
     location.pathname.startsWith(route)
@@ -50,6 +50,8 @@ const App: React.FC = () => {
   const handleMenuToggle = (expanded: boolean) => {
     setMenuExpanded(expanded);
   };
+
+  const { logOut } = useContext(UserContext)
 
   return (
     <div className={`radio-app ${menuExpanded ? 'menu-expanded' : ''} ${
@@ -76,8 +78,8 @@ const App: React.FC = () => {
             <img src={logo} alt="121 Expreso" className="logo-image" />
           </div>
           <div className="footer-right">
-            {user ? (
-              <div className="user-icon">👤</div>
+            {user.user ? (
+              <button onClick={logOut}>Cerrar Sesión</button>
             ) : (
               <button
                 className="login-button"

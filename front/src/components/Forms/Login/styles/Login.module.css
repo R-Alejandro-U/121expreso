@@ -108,7 +108,7 @@ form {
   margin-top: 20px;
 }
 
-button {
+.buttons button {
   background-color: #000;
   color: #fff;
   border: none;
@@ -120,7 +120,7 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.buttons button:hover {
   background-color: #333;
 }
 
@@ -147,7 +147,7 @@ button:hover {
     letter-spacing: 6px;
   }
 
-  button {
+  .buttons button {
     font-size: 0.95rem;
     padding: 8px 16px;
   }
@@ -174,7 +174,7 @@ button:hover {
     letter-spacing: 4px;
   }
 
-  button {
+  .buttons button {
     font-size: 0.9rem;
     padding: 8px 16px;
   }
@@ -197,7 +197,7 @@ button:hover {
     letter-spacing: 3px;
   }
 
-  button {
+  .buttons button {
     font-size: 0.85rem;
     padding: 6px 12px;
   }
