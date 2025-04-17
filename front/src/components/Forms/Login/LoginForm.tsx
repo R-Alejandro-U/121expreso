@@ -7,6 +7,8 @@ export const LoginForm: React.FC<ILoginFormProps> = ({data: { email, password },
     return(
         <form onSubmit={handleSubmit}>
             <fieldset className={styles.border}>
+            <h2 className={styles.title}>Hola, ¡Logueate!</h2>
+            <p className={styles.subtitle}>Ingresa tus credenciales para continuar</p>
                 <div className={styles.inputs}>
                     <div>
                         <label htmlFor="email">Email</label>
