@@ -15,13 +15,12 @@ interface RadioMenuProps {
 
 const RadioMenu: React.FC<RadioMenuProps> = ({ onMenuToggle }) => {
   const [isMobile, setIsMobile] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     const checkIfMobile = () => {
       const mobile = window.innerWidth <= 768;
       setIsMobile(mobile);
-      console.log('Window width:', window.innerWidth, 'isMobile:', mobile);
     };
 
     checkIfMobile();
@@ -36,8 +35,6 @@ const RadioMenu: React.FC<RadioMenuProps> = ({ onMenuToggle }) => {
     if (onMenuToggle) {
       onMenuToggle(isExpanded);
     }
-    console.log('isExpanded:', isExpanded);
-    console.log('isMobile:', isMobile);
   }, [isExpanded, onMenuToggle, isMobile]);
 
   const toggleMenu = () => {
