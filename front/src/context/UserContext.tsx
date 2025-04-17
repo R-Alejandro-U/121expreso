@@ -1,11 +1,14 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 import { createContext, useState } from "react";
-import { ILoginResponse, IUser } from "./interface/Login.interface";
+import { ILoginResponse, ISignUpResponse, IUser } from "./interface/Login.interface";
 import { DataLogin } from "../components/Forms/Login/LoginForm.interface";
+import { IRegister } from "../components/Forms/register/RegisterForm.interface";
 
 export const UserContext = createContext<any>({
     user: null,
+    signup: async () => ({} as string),
     loginUser: async () => ({} as IUser),
     logOut: () => {},
 });
@@ -15,7 +18,16 @@ export const UserProvider = ({children}: {children: React.ReactNode}) => {
         const storedUser = localStorage.getItem("user");
         return storedUser ? storedUser : null;
     });
-    const loginUser = async(LoginUser: DataLogin): Promise<IUser> => {
+    const signup = async (newUser: IRegister): Promise<string> => {
+        try {
+            const { data } = await axios.post<ISignUpResponse>('https://one21expreso.onrender.com/auth/signup', newUser);
+            return data.message; 
+        } catch ({ response }: any) {
+            console.log(response);
+            throw response.data;
+        }
+    };
+    const loginUser = async (LoginUser: DataLogin): Promise<IUser> => {
         try {
             const { data } = await axios.post<ILoginResponse>('https://one21expreso.onrender.com/auth/signin', LoginUser)
             localStorage.setItem("user", JSON.stringify(data.user));
@@ -33,6 +45,7 @@ export const UserProvider = ({children}: {children: React.ReactNode}) => {
     };
     const value = {
         user,
+        signup,
         loginUser,
         logOut,
     };
