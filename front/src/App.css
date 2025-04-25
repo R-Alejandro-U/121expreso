@@ -126,6 +126,8 @@
     bottom: 84px; /* Justo por encima del RadioMenu (60px) */
     z-index: 800; /* Menor que el RadioMenu en móvil (850) */
     height: 8.39%;
+    gap: 11px;
+    padding: 10px 7px;
   }
 
   .radio-menu {
@@ -134,7 +136,8 @@
   }
 
   .logo-image {
-    height: 41px;
+    height: 31px;
+    width: auto;
   }
 }
 

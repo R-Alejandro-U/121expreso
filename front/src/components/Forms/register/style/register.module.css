@@ -1,141 +1,206 @@
+/* Importar fuentes */
 @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* Variables de fuentes */
 :root {
-  --font-tamil: 'Rock Salt', 'cursive';
+  --font-tamil: 'Rock Salt', cursive;
   --font-sans: 'Noto Sans', sans-serif;
 }
 
-.form{
-    min-height: 100vh;
-    max-height: 100vh;
-    padding-bottom: 2.9em;
+.register-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
-.form p {
-    color: red;
-    font-size: 0.8em;
+.register-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
-legend {
-    font-family: 'Rock Salt';
-    font-size: 3em;
+.register-border {
+  width: 55%;
+  max-width: 1207px;
+  padding: 68px 68px;
+  margin: 40px auto;
+  border-radius: 22px;
+  background-color: #f5f5dc;
+  color: #000;
+  font-family: var(--font-sans);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 }
 
-label {
-    font-family: 'Noto Sans';
-    font-size: 1.5em;
+.register-title {
+  font-family: var(--font-tamil);
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  letter-spacing: 9px;
+  text-align: center;
+  color: #000;
 }
 
-input {
-    border-radius: 25px;
-    border: none;
-    padding: 0.6em 0.5em;
+.register-inputs {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.border{
-    background-color: rgb(211, 204, 196);
-    margin: 10em;
-    padding: 3em;
-    display: flex;
-    color: black;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: solid rgba(16, 16, 151, 0.507) 0.3em;
-    border-radius: 25px;
-    width: 30em;
-    gap: 1em;
-    height: 35em;
+.register-inputs div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.inputs {
-    display: flex;
-    flex-direction: column;
-    border-radius: 50px;
-    color: black;
-    margin: 0 1em;
-    width: 16em;
+.register-inputs div label {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: #000;
 }
 
-.buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    gap: 2em;
+.register-inputs div input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: transparent;
+  font-size: 1rem;
+  color: #000;
+  font-family: var(--font-sans);
 }
 
-.buttons button{
-    padding: 0.5em 2em;
-    border: none;
-    border-radius: 25px;
-    color: aliceblue;
-    background-color: black;
+.register-inputs div input::placeholder {
+  color: #000;
+  font-family: var(--font-sans);
 }
 
-/* Teléfonos (< 600px) */
+.register-inputs div p {
+  color: #f44336;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.register-buttons {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.register-buttons button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease;
+}
+
+.register-buttons button:hover {
+  background-color: #333;
+}
+
+/* Ajustes responsivos */
+
+/* Tablets (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .register-border {
+    width: 73%;
+    margin: 30px auto;
+    padding: 30px;
+  }
+
+  .register-inputs {
+    max-width: 400px;
+  }
+
+  .register-inputs div input {
+    font-size: 0.95rem;
+  }
+
+  .register-title {
+    font-size: 1.8rem;
+    letter-spacing: 6px;
+  }
+
+  .register-buttons button {
+    font-size: 0.95rem;
+    padding: 8px 16px;
+  }
+}
+
+/* Móviles (max-width: 768px) */
 @media (max-width: 768px) {
-    .border {
-      margin: 0.5rem;
-      padding: 1.5rem;
-      min-height: 18rem;
-      border-radius: 15px;
-    }
-  
-    .title {
-      font-size: 2rem;
-    }
-  
-    .inputs {
-      max-width: 100%;
-    }
-  
-    .inputs label {
-      font-size: 1rem;
-    }
-  
-    .inputs input {
-      font-size: 0.9rem;
-      padding: 0.5rem 0.8rem;
-    }
-  
-    .buttons {
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-  
-    .buttons button {
-      width: 80%;
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-    }
+  .register-border {
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
   }
-  
-  /* Tablets (601px - 900px) */
-  @media (max-width: 1024px) {
-    .border {
-      margin: 1rem;
-      padding: 2rem;
-      min-height: 20rem;
-      width: 80%;
-    }
-  
-    .title {
-      font-size: 2.3rem;
-    }
-  
-    .inputs input {
-      font-size: 1rem;
-    }
-  
-    .buttons {
-      gap: 1rem;
-      flex-direction: row;
-    }
-  
-    .buttons button {
-      padding: 0.6rem 1.2rem;
-      font-size: 1rem;
-    }
+
+  .register-inputs {
+    max-width: 100%;
   }
+
+  .register-inputs div input {
+    font-size: 0.9rem;
+  }
+
+  .register-title {
+    font-size: 1.5rem;
+    letter-spacing: 4px;
+  }
+
+  .register-buttons button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+
+  .register-buttons {
+    flex-direction: column;
+  }
+}
+
+/* Móviles pequeños (max-width: 480px) */
+@media (max-width: 480px) {
+  .register-border {
+    width: 95%;
+    margin: 10px auto;
+    padding: 15px;
+  }
+
+  .register-inputs div input {
+    font-size: 0.85rem;
+    padding: 17px;
+  }
+
+  .register-title {
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+  }
+
+  .register-buttons button {
+    font-size: 0.85rem;
+    padding: 12px 128px;
+  }
+}
