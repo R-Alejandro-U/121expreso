@@ -217,7 +217,7 @@
 .radio-menu.mobile .menu-item {
   flex-direction: column;
   justify-content: center;
-  padding: 6px 11px;
+  padding: 6px 8px;
   margin: 0;
   flex: 1;
 }
@@ -225,7 +225,7 @@
 .radio-menu.mobile .menu-text {
   margin-left: 0;
   margin-top: 5px;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   font-family: 'Nico Moji', sans-serif;
   opacity: 1; /* En móvil, siempre visible, sin transición */
   transition: none; /* Sin transición en móvil */
