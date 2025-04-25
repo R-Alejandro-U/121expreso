@@ -4,13 +4,17 @@ import { ReviewsForm } from "../../components/Forms/comments/Reviews";
 import Swal from "sweetalert2";
 import { SubmitComment } from "../../components/Forms/comments/handler/handleSubmitComment";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { CommentsContex } from "../../context/CommentContex";
+import { CommentsContext } from "../../context/CommentContex";
+import { ReviewCard } from "../../components/Comment/reviewCard";
+import { GetComments } from "../../context/interface/Comment.interface";
+import styles from './Reseñas.module.css'
 
 export const Reviews: React.FC = () => {
   const [newComment, setNewComment] = useState<string>('');
   const [errors, setErrors] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true);
   const navigate: NavigateFunction = useNavigate();
-  const { postReview } = useContext(CommentsContex);
+  const { postReview, getComments, reviews } = useContext(CommentsContext);
   useEffect(() => {
     setErrors(
       newComment.length ? 
@@ -20,6 +24,9 @@ export const Reviews: React.FC = () => {
       : 'Por favor, llene el formularío.'
     );
   }, [newComment])
+  useEffect(() => {
+    getComments().finally(() => setLoading(false));
+  }, [getComments])
   const handleSubmitComment = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     try {
@@ -39,7 +46,12 @@ export const Reviews: React.FC = () => {
   };
   return (
     <div>
-      <ReviewsForm data={newComment} setNewComment={setNewComment} handleSubmitComment={handleSubmitComment} message={errors}/>
+      <main>
+        <ReviewsForm data={newComment} setNewComment={setNewComment} handleSubmitComment={handleSubmitComment} message={errors}/>
+      </main>
+      <section className={styles.reviewsGrid}>
+        {loading ? <p>Cargando reseñas</p> : !reviews?.length ? <p>No hay reseñas, eso es triste. ¿No quieres ser el primero en dejar tu huella?</p> : reviews.map((comment: GetComments) => <ReviewCard key={comment.id} data={comment}/>)}
+      </section>
       <div>
         <Footer />
       </div>
