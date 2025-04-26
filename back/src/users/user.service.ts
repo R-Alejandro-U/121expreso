@@ -37,7 +37,7 @@ export const userService = {
     getAllUsers: async (page: number, limit: number): Promise<GetUsersResponse> => {
         try {
             const [users, total_items] : [User[], number] = await userModel.findAndCount({ 
-                relations: ["user"], 
+                relations: ["comments"], 
                 skip: (page -1) * limit,
                 take: limit
             });
