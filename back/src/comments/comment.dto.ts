@@ -1,5 +1,4 @@
 import { IsNotEmpty, IsString, Length } from "class-validator";
-import { IPages } from "../utils/globalDTOs/pages.dto";
 
 export class CommentDTO {
     id?: string; 
@@ -10,7 +9,6 @@ export class CommentDTO {
 
 export class GetCommentsResponse {
     comments!: CommentDTO[];
-    pagination_info!: IPages;
 }
 
 export class NewCommentDTO {
