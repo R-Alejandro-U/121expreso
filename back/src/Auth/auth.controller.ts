@@ -16,8 +16,7 @@ export const authController = {
                 return;
             };
             const { passwordConfirmation, ...user} = body;
-            const response: string = await authService.register(user);
-            res.status(201).json({message: response, status: 201}); 
+            res.status(201).json({message: await authService.register(user), status: 201}); 
         } catch (error) {
             res.status(409).json({error, status: 409});
         };

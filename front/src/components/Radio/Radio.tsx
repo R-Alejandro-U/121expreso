@@ -1,4 +1,6 @@
 import React, { useRef, useState } from "react";
+import play from '../../../public/tocar.svg'
+import styles from './styles.module.css';
 
 const RadioPlayer: React.FC = () => {
 
@@ -28,8 +30,9 @@ const RadioPlayer: React.FC = () => {
         Tu navegador no soporta audio.
       </audio>
       <div>
-        <button className={isPlaying ? "live-radio-button" : "off-radio-button"} onClick={toglePlay}>
-            {isPlaying ? 'RADIO EN VIVO' : 'DALE PLAY'}
+        <button className={isPlaying ? styles["live-radio"] : styles["off-radio"]} onClick={toglePlay}>
+            { !isPlaying && <img src={play} className='playing'></img>}
+            RADIO EN VIVO
             <div className="wave-icon">
                 <svg viewBox="0 0 24 8" width="24" height="8">
                     <path

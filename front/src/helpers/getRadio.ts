@@ -25,9 +25,6 @@ const API_URL = 'https://api.mixcloud.com/121expreso/cloudcasts/';
 
 export const getAllShows = async (): Promise<IProgramLite[]> => {
   try {
-    console.log('Solicitando shows desde Mixcloud...');
-    console.log(`URL completa: ${API_URL}`);
-
     const { data } = await axios.get<MixcloudResponse>(API_URL, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',

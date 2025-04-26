@@ -8,3 +8,8 @@ export interface ILoginResponse {
     user: IUser;
     token: string;
 };
+
+export interface ISignUpResponse {
+    message: string;
+    status: number;
+}

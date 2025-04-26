@@ -9,15 +9,14 @@ import { Comment } from "./Comment.entity"
 import { API_KEY } from "../configs/envs.config";
 
 export const commentService = {
-    getAllComments: async (page: number, limit: number): Promise<GetCommentsResponse> => {
+    getAllComments: async (limit: number): Promise<GetCommentsResponse> => {
         try {
-            const [comments, total_items] : [Comment[], number] = await commentModel.findAndCount({ 
-                relations: ["user"], 
-                skip: (page -1) * limit,
-                take: limit
-            });
-            if(!comments.length && total_items === 0) throw new Error('Sin comentarios en la base de datos.');
-            const max_pages: number = Math.ceil(total_items / limit) || 1;
+            const comments : Comment[] = await commentModel.createQueryBuilder('comment')
+            .orderBy('RAND()')
+            .limit(limit)
+            .leftJoinAndSelect('comment.user', 'user')
+            .getMany();
+            console.log(comments);
             const partialComments: CommentDTO[] = comments.map((comment: Comment): CommentDTO => {
                 const { UpDateComment, user, ...partialComment } = comment;
                 const { name } = user;
@@ -25,12 +24,6 @@ export const commentService = {
             });
             return {
                 comments: partialComments,
-                pagination_info: {
-                    current_items: partialComments.length,
-                    max_pages,
-                    page,
-                    total_items
-                },
             };
         } catch (error) {
             throw error;

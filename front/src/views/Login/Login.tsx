@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { LoginForm } from '../../components/Forms/Login/LoginForm';
-import { handleImputChange } from '../../components/Forms/Login/handles/handleInputChange';
+import { handleImputChange } from '../../components/Forms/Login/handlers/handleInputChange';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import { handleOnSubmit } from '../../components/Forms/Login/handles/handleOnSubmit';
+import { handleOnSubmit } from '../../components/Forms/Login/handlers/handleOnSubmit';
 import { UserContext } from '../../context/UserContext';
 import { DataLogin } from '../../components/Forms/Login/LoginForm.interface';
 import { validate } from '../../components/Forms/Login/utils/validate';

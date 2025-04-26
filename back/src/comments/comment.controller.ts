@@ -9,11 +9,9 @@ import { validate, ValidationError } from 'class-validator';
 export const commentController = {
     getAllComments: async (req: Request, res: Response) => {
         try {
-            let page: any = req.query['page'];
             let limit: any = req.query['limit'];
-            if (!page || isNaN(parseInt(page, 10))) page = 1;
             if (!limit || isNaN(parseInt(limit, 10))) limit = 3;
-            res.status(200).json({ data: await commentService.getAllComments(+page, +limit)});
+            res.status(200).json({ data: await commentService.getAllComments(+limit)});
         } catch (error) {
             const err: string = error instanceof Error ? error.message : 'Error desconocido.'
             res.status(404).json({ error: 'Sin información', message: err });

@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styles from './Home.module.css';
 import backgroundVideo from '../../assets/videos/vinilo-video.mp4';
 import logo from '../../assets/banner.svg';
-import { reviews } from '../../data/reviews';
-import { ReviewCardProps } from '../../interfaces/IReviewProps';
 import { ShowCardProps } from '../../interfaces/IShowProps';
 import { getAllShows, IProgramLite } from '../../helpers/getRadio';
 import Footer from '../../components/Footer/Footer';
+import { CommentsContext } from '../../context/CommentContex';
+import { GetComments } from '../../context/interface/Comment.interface';
+import { ReviewCard } from '../../components/Comment/reviewCard';
 
 const ShowCard: React.FC<ShowCardProps> = ({ title, duration, image, url }) => {
   return (
@@ -29,19 +30,12 @@ const ShowCard: React.FC<ShowCardProps> = ({ title, duration, image, url }) => {
   );
 };
 
-const ReviewCard: React.FC<ReviewCardProps> = ({ text, author, date }) => (
-  <div className={styles.reviewCard}>
-    <p>{text}</p>
-    <p className={styles.reviewAuthor}>{author}</p>
-    <p className={styles.reviewDate}>{date}</p>
-  </div>
-);
-
 const Home: React.FC = () => {
   const [shows, setShows] = useState<IProgramLite[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
+  const [loadingReviews, setLoadingReviews] = useState<boolean>(true);
+  const {getComments, reviews} = useContext(CommentsContext);
   useEffect(() => {
     const fetchShows = async () => {
       try {
@@ -77,6 +71,10 @@ const Home: React.FC = () => {
       },
     ],
   };
+
+  useEffect(() => {
+    getComments().finally(() => setLoadingReviews(false));
+  }, [getComments])
 
   return (
     <div className={styles.homeContainer}>
@@ -131,9 +129,12 @@ const Home: React.FC = () => {
       <section className={styles.reviewsSection}>
         <h2 className={styles.sectionTitle}>RESEÑAS DE LOS OYENTES <br /> "LA MÚSICA NOS TRASLADA"</h2>
         <div className={styles.reviewsGrid}>
-          {reviews.map((review, index) => (
-            <ReviewCard key={index} text={review.text} author={review.author} date={review.date} />
-          ))}
+          {
+            loadingReviews 
+              ? <p>Cargando reseñas</p> 
+              : !reviews?.length 
+                ? <p>No hay reseñas, eso es triste. ¿No quieres ser el primero en dejar tu huella?</p> 
+                : reviews.map((comment: GetComments) => <ReviewCard key={comment.id} data={comment}/>)}
         </div>
         <button className={styles.addCommentButton}>AGREGAR COMENTARIO</button>
       </section>

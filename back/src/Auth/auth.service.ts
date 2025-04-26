@@ -5,7 +5,7 @@ import { LoginResponse, UserLoginDTO, UserRegisterDTO } from './auth.dto';
 import { userModel } from '../configs/database.config';
 import { User } from '../users/User.entity';
 
-const hashPassword = async (password: string): Promise<string> => {
+export const hashPassword = async (password: string): Promise<string> => {
     try {
         const salt: string = await bcrypt.genSalt(SALT);
         return await bcrypt.hash(password, salt);
@@ -46,8 +46,8 @@ export const authService = {
             const user: User | null = await userModel.findOneBy({ email });
             if (!user || !(await bcrypt.compare(password, user.password))) throw new Error('Contraseña o email incorrectos.');
             if(user.isDeleted) throw new Error('Contraseña o email incorrectos.'); 
-            const { id, name, isAdmin } = user;
-            const token: string = Jwt.sign({ id, name, sub: id }, SECRET_WORD, { expiresIn: '1d' });
+            const { id, name, isAdmin, isDeleted } = user;
+            const token: string = Jwt.sign({ id, name, sub: id, isAdmin, isDeleted }, SECRET_WORD, { expiresIn: '1d' });
             return { user: { id, name, isAdmin }, token };
         } catch (error) {
             const err: string = error instanceof Error ? error.message : 'Hubo un error desconocido.';

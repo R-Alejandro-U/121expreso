@@ -1,5 +1,9 @@
 export interface ReviewCardProps {
-    text: string;
-    author: string;
-    date: string;
+    comment: string,
+    CreateComment: Date,
+    user: string
+};
+
+export interface data {
+    data: ReviewCardProps;
 }

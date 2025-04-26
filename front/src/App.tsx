@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // src/App.tsx
 import React, { useContext, useEffect, useState } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
@@ -10,7 +11,7 @@ import Donaciones from './views/Donaciones/Donaciones';
 import Login from './views/Login/Login';
 import Registro from './views/Registro/Registro';
 import RadioMenu from './components/RadioMenu/RadioMenu';
-import Reseñas from './views/Reseñas/Reseñas';
+import { Reviews } from './views/Reseñas/Reviews';
 import logo from "./assets/banner.svg"
 import RadioPlayer from './components/Radio/Radio';
 
@@ -20,8 +21,8 @@ const App: React.FC = () => {
   const navigate = useNavigate();
   const [menuExpanded, setMenuExpanded] = useState(false);
 
-  const protectedRoutes = ['/perfil'];
-  const routesWithMenu = ['/', '/conocenos', '/donaciones', '/reseñas', '/contacto'];
+  const protectedRoutes: string[] = ['/perfil'];
+  const routesWithMenu: string[] = ['/', '/conocenos', '/donaciones', '/reseñas', '/contacto'];
 
   useEffect(() => {
     if (menuExpanded) {
@@ -32,24 +33,26 @@ const App: React.FC = () => {
   }, [menuExpanded]);
 
   useEffect(() => {
-    const isAttemptingProtectedRoute = protectedRoutes.some((route) =>
+    const isAttemptingProtectedRoute: boolean = protectedRoutes.some((route) =>
       location.pathname.startsWith(route)
     );
 
-    if (!user && isAttemptingProtectedRoute) {
+    if (!user.user && isAttemptingProtectedRoute) {
       navigate('/login');
-    } else if (user && ['/login', '/register'].includes(location.pathname)) {
+    } else if (user.user && ['/login', '/register'].includes(location.pathname)) {
       navigate('/');
     }
-  }, [location.pathname, navigate, user]);
+  }, [location.pathname, navigate, protectedRoutes, user.user]);
 
-  const shouldShowMenu = routesWithMenu.some((route) =>
+  const shouldShowMenu: boolean = routesWithMenu.some((route) =>
     location.pathname.startsWith(route)
   );
 
-  const handleMenuToggle = (expanded: boolean) => {
+  const handleMenuToggle = (expanded: boolean): void => {
     setMenuExpanded(expanded);
   };
+
+  const { logOut } = useContext(UserContext)
 
   return (
     <div className={`radio-app ${menuExpanded ? 'menu-expanded' : ''} ${
@@ -61,7 +64,7 @@ const App: React.FC = () => {
           <Route path="/conocenos" element={<Conocenos />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/donaciones" element={<Donaciones />} />
-          <Route path="/reseñas" element={<Reseñas />} />
+          <Route path="/reseñas" element={<Reviews />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registro />} />
           {user && <></>}
@@ -76,8 +79,8 @@ const App: React.FC = () => {
             <img src={logo} alt="121 Expreso" className="logo-image" />
           </div>
           <div className="footer-right">
-            {user ? (
-              <div className="user-icon">👤</div>
+            {user.user ? (
+              <button className="login-button"  onClick={logOut}>Cerrar Sesión</button>
             ) : (
               <button
                 className="login-button"
