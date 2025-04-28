@@ -92,6 +92,7 @@
   align-items: center;
   min-height: 50vh;
   position: relative; /* Para que el ::before se posicione dentro de esta sección */
+  padding-bottom: 5em;
 }
 
 .thirdSection::before {
