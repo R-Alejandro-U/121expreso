@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './Conocenos.module.css';
-import canto from '../../assets/images/hombre-cantando.svg';
-import audifonos from '../../assets/images/niña-audifonos.svg';
+import canto from '../../assets/images/charles.jpg.webp';
+import audifonos from '../../assets/images/Fondo.webp';
 import Footer from '../../components/Footer/Footer';
+import { Link } from 'react-router-dom';
 
 const Conocenos: React.FC = () => {
   return (
@@ -20,23 +21,23 @@ const Conocenos: React.FC = () => {
 
       <section className={styles.secondSection}>
         <h3 className={styles.sectionTitle}>
-          #121Expreso te transporta a la era dorada del rock clásico, justo cuando lo deseas, y te conecta con un universo de música que nunca pasa de moda.
+          Donde nace #121Expreso?
         </h3>
         <p className={styles.sectionParagraph}>
-          Reunimos la energía del rock clásico en un solo lugar: los mejores éxitos de leyendas como Led Zeppelin, The Rolling Stones y Pink Floyd, transmisiones en vivo que te hacen sentir en primera fila, y programas especiales que celebran la historia del género. Somos apasionados del rock, trabajando para los fans del rock, siempre buscando ofrecer la mejor experiencia auditiva para quienes viven y respiran los clásicos. Con 121 Expresso, no solo escuchas música, ¡vives el espíritu del rock clásico en cada nota! 🤘
+          Allá lejos y hace tiempo. Necesidad de compartir música. Y divertirse. 100% autogestionado. Desde la idea, la preproducción, hasta salir al aire Y EN VIVO!. Crear una comunicación mediante la música. De ayudar, de ofrecer. De jugar. De eso se trata. Por eso no siempre #121Expreso está al aire. Después de todo, mejor calidad, antes que cantidad. 
         </p>
       </section>
 
       <section className={styles.thirdSection}>
         <div className={styles.column3}>
-          <img src={audifonos} alt="Niña con Audífonos" className={styles.girlHeadphones} />
+          <img src={audifonos} alt="Fondo del estudio" className={styles.girlHeadphones} />
         </div>
 
         <div className={styles.column4}>
           <h2 className={styles.listenTitle}>Escuchanos</h2>
           <h2 className={styles.whereTitle}>DONDE QUIERAS</h2>
           <p className={styles.listenParagraph}>
-            En el auto, en movimiento, en casa o en la oficina, también en tu Amazon Alexa. Estamos donde querés escuchar.
+            Desde tu casa, desde tu dispositivo móvil, en el auto o en tu walkman (ja!)  #121Expreso está, siempre.
           </p>
         </div>
       </section>
@@ -44,7 +45,7 @@ const Conocenos: React.FC = () => {
       <section className={styles.cardSection}>
         <h2 className={styles.moreTitle}>MÁS</h2>
         <h2 className={styles.questionsTitle}>Preguntas?</h2>
-        <button className={styles.contactButton}>CONTACTANOS</button>
+        <Link to='/contacto'><button className={styles.contactButton}>CONTACTANOS</button></Link>
       </section>
 
       <div>
