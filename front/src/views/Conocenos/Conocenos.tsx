@@ -15,7 +15,7 @@ const Conocenos: React.FC = () => {
         </div>
 
         <div className={styles.column2}>
-          <img src={canto} alt="Hombre Cantando" className={styles.manSinging} />
+          <img src={canto} alt="Foto de portada" className={styles.manSinging} />
         </div>
       </section>
 
