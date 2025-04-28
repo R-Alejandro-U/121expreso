@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Footer.module.css';
 import logo from '../../assets/banner.svg';
 import { FaWhatsapp, FaInstagram } from 'react-icons/fa';
-import { FaXTwitter } from 'react-icons/fa6';
+import { FaGooglePlay, FaXTwitter } from 'react-icons/fa6';
 
 const Footer: React.FC = () => {
   return (
@@ -27,16 +27,19 @@ const Footer: React.FC = () => {
           <a href="https://x.com/121expreso" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
             <FaXTwitter />
           </a>
+          <a href="https://play.google.com/store/apps/details?id=com.expreso121.ecoargentinaapps" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
+            <FaGooglePlay />
+          </a>
         </div>
         <div className={styles.credits}>
           <h3 className={styles.titleColumnThree}>Créditos</h3>
           <p className={styles.paragraphColumnTwo}>
-            Diseño y creación de la web por{' '}
-            <a href="mailto:maria.ignacia@example.com" className={styles.creditLink}>
+            ¿Sueñas con tener una página web profesional como esta? ¡Contáctanos hoy mismo y convierte tu idea en realidad con un proyecto a tu medida!<br/>Diseño y creación de la web por{' '}
+            <a href="mailto:mfernandezpolanco@gmail.com" className={styles.creditLink}>
               María Ignacia
             </a>{' '}
             y{' '}
-            <a href="mailto:alejandro.urdaneta@example.com" className={styles.creditLink}>
+            <a href="mailto:alejandro.urdaneta2314@gmail.com" className={styles.creditLink}>
               Alejandro Urdaneta
             </a>.
           </p>
