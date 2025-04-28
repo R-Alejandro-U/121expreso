@@ -342,7 +342,7 @@
   /* Sección 3 */
 
   .girlHeadphones {
-    max-height: 76vh;
+    max-width: 100%;
   }
 
   .listenTitle,
