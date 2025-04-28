@@ -11,6 +11,7 @@ import Footer from '../../components/Footer/Footer';
 import { CommentsContext } from '../../context/CommentContex';
 import { GetComments } from '../../context/interface/Comment.interface';
 import { ReviewCard } from '../../components/Comment/reviewCard';
+import { Link } from 'react-router-dom';
 
 const ShowCard: React.FC<ShowCardProps> = ({ title, duration, image, url }) => {
   return (
@@ -90,12 +91,12 @@ const Home: React.FC = () => {
         <div className={styles.card}>
           <h1 className={styles.bannerTitle}>#121 EXPRESO</h1>
           <p className={styles.parrafoHome}>
-            Hola, ¿te apasiona la música como a mí? Lo es, es una pregunta tonta, pero una pregunta tonta, ¿obvio sí un mundo música como es mente? Lo es una pregunta tonta, ¿quieres aprovechar esta aventura musical? Yo digo que no, gracias, quiero poderme escuchar mejor lo mejor de estos clásicos que bailaban nuestras vidas para limpiar hasta esas joyas escondidas que te hacen sentir como Chayly a través de la pista desde un balcón, pero no con auriculares.
+            Te gusta la música? El mundo sin música no existe. Es la máquina del tiempo perfecta. Te traslada ahí, en forma instantánea. Gratis. Y con magia, que es lo importante. Negocio redondo. Te invito. Domingo por la tarde, donde pinta el bajón, acá estaremos. Un programa de los clásicos, pero con ese toque de irreverencia que no vas a encontrar en otro lado. 
           </p>
           <p className={styles.secondParrafoHome}>
             ¿Quieres apoyarme o ponerte en contacto conmigo para esta aventura musical?
           </p>
-          <button className={styles.contactButton}>CONTÁCTAME</button>
+          <Link to='/contacto'><button className={styles.contactButton}>CONTÁCTAME</button></Link>
         </div>
       </div>
 
@@ -116,7 +117,6 @@ const Home: React.FC = () => {
                 key={index}
                 title={show.title}
                 duration={show.duration}
-                date={show.date || 'Fecha no disponible'}
                 image={show.image}
                 url={show.url}
               />
@@ -136,7 +136,7 @@ const Home: React.FC = () => {
                 ? <p>No hay reseñas, eso es triste. ¿No quieres ser el primero en dejar tu huella?</p> 
                 : reviews.map((comment: GetComments) => <ReviewCard key={comment.id} data={comment}/>)}
         </div>
-        <button className={styles.addCommentButton}>AGREGAR COMENTARIO</button>
+        <Link to='/reseñas'><button className={styles.addCommentButton}>AGREGAR COMENTARIO</button></Link>
       </section>
 
       <div>
