@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import styles from './RadioMenu.module.css';
-import DiscodeVinilo from "../../assets/icons/disco-de-vinilo.svg"
-import OndasdeRadio from "../../assets/icons/ondas-de-radio.svg"
-import RockRoll from "../../assets/icons/rock-and-roll.svg"
-import Corazon from "../../assets/icons/corazon.svg"
-import Contacto from "../../assets/icons/audifonos-inalambricos.svg"
-
+import DiscodeVinilo from '../../assets/icons/disco-de-vinilo.svg';
+import OndasdeRadio from '../../assets/icons/ondas-de-radio.svg';
+import RockRoll from '../../assets/icons/rock-and-roll.svg';
+import Corazon from '../../assets/icons/corazon.svg';
+import Contacto from '../../assets/icons/audifonos-inalambricos.svg';
 
 interface RadioMenuProps {
   onMenuToggle?: (expanded: boolean) => void;
@@ -42,11 +41,11 @@ const RadioMenu: React.FC<RadioMenuProps> = ({ onMenuToggle }) => {
   };
 
   const menuItems = [
-    { id: 1, path: '/', title: 'INICIO', icon: <img src={DiscodeVinilo} alt='Inicio'/> },
-    { id: 2, path: '/conocenos', title: 'CONOCENOS', icon: <img src={OndasdeRadio} alt='Conocenos'/> },
-    { id: 3, path: '/donaciones', title: 'DONACIONES', icon: <img src={RockRoll} alt='Donaciones'/> },
-    { id: 4, path: '/reseñas', title: 'RESEÑAS', icon: <img src={Corazon} alt='Reseñas'/> },
-    { id: 5, path: '/contacto', title: 'CONTACTO', icon: <img src={Contacto} alt='Contacto'/> },
+    { id: 1, path: '/', title: 'INICIO', icon: <img src={OndasdeRadio} alt='Inicio' /> },
+    { id: 2, path: '/conocenos', title: 'CONOCENOS', icon: <img src={DiscodeVinilo} alt='Conocenos' /> },
+    { id: 3, path: '/donaciones', title: 'DONACIONES', icon: <img src={Corazon} alt='Donaciones' /> },
+    { id: 4, path: '/reseñas', title: 'RESEÑAS', icon: <img src={RockRoll} alt='Reseñas' /> },
+    { id: 5, path: '/contacto', title: 'CONTACTO', icon: <img src={Contacto} alt='Contacto' /> },
   ];
 
   const menuVariants = {
@@ -58,6 +57,19 @@ const RadioMenu: React.FC<RadioMenuProps> = ({ onMenuToggle }) => {
       width: isMobile ? '100%' : '93px',
       transition: { duration: 0.3, ease: 'easeInOut' },
     },
+  };
+
+  const textVariants = {
+    hidden: { opacity: 0, x: -20 }, 
+    visible: () => ({
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.3,
+        delay: 0.3, 
+        ease: 'easeOut',
+      },
+    }),
   };
 
   return (
@@ -74,7 +86,6 @@ const RadioMenu: React.FC<RadioMenuProps> = ({ onMenuToggle }) => {
           initial="expanded"
           animate={isExpanded ? 'expanded' : 'collapsed'}
           variants={menuVariants}
-          // style={{ background: 'blue' }} // Comentamos el estilo inline para probar los estilos del CSS
         >
           {menuItems.map((item) => (
             <div className={styles['menu-item-wrapper']} key={item.id}>
@@ -88,7 +99,14 @@ const RadioMenu: React.FC<RadioMenuProps> = ({ onMenuToggle }) => {
               >
                 <span className={styles['menu-icon']}>{item.icon}</span>
                 {(isMobile || isExpanded) && (
-                  <span className={styles['menu-text']}>{item.title}</span>
+                  <motion.span
+                    className={styles['menu-text']}
+                    initial="hidden"
+                    animate="visible"
+                    variants={textVariants}
+                  >
+                    {item.title}
+                  </motion.span>
                 )}
               </NavLink>
             </div>
