@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './style/register.module.css';
 import { IRegisterFormProps } from './RegisterForm.interface';
+import { Link } from 'react-router-dom';
 
 export const RegisterForm: React.FC<IRegisterFormProps> = ({
   data: { name, email, password, passwordConfirmation },
@@ -65,7 +66,7 @@ export const RegisterForm: React.FC<IRegisterFormProps> = ({
           </div>
           <div className={styles['register-buttons']}>
             <button type="submit">Registrarse</button>
-            <button type="button">Iniciar sesión</button>
+            <Link to='/login'><button type="button">Iniciar sesión</button></Link>
           </div>
         </fieldset>
       </form>
