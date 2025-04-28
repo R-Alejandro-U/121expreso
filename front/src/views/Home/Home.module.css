@@ -159,7 +159,6 @@
   overflow: hidden;
 }
 
-
 .oldShowsCassete::before {
   content: '';
   position: absolute;
@@ -399,13 +398,6 @@
   .reviewCard {
     width: 100%;
     max-width: 41.5vh;
-  }
-
-  .oldShowsSection,
-  .reviewsSection {
-    padding: 20px 39px;
-    margin-top: 60px; /* Espacio para el RadioMenu */
-    margin-bottom: 120px; /* Espacio para el footer (60px) + RadioMenu (60px) */
   }
 
   .oldShowsCassete {

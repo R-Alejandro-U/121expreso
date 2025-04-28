@@ -115,7 +115,6 @@
 .girlHeadphones {
   max-width: 100%;
   height: auto;
-  max-height: 117vh;
 }
 
 .column4 {
@@ -269,8 +268,7 @@
 
   .girlHeadphones {
     position: static;
-    max-height: 114vh;
-    max-width: 87vh;
+    width: 100%;
     margin-bottom: 20px;
   }
 
@@ -344,7 +342,7 @@
   /* Sección 3 */
 
   .girlHeadphones {
-    max-height: 76vh;
+    max-width: 100%;
   }
 
   .listenTitle,
