@@ -17,6 +17,7 @@ import RadioPlayer from './components/Radio/Radio';
 
 const App: React.FC = () => {
   const { user } = useContext(UserContext);
+  const token: string | null = localStorage.getItem('token');
   const location = useLocation();
   const navigate = useNavigate();
   const [menuExpanded, setMenuExpanded] = useState(false);
@@ -79,7 +80,7 @@ const App: React.FC = () => {
             <img src={logo} alt="121 Expreso" className="logo-image" />
           </div>
           <div className="footer-right">
-            {user.user ? (
+            {token ? (
               <button className="login-button"  onClick={logOut}>Cerrar Sesión</button>
             ) : (
               <button
