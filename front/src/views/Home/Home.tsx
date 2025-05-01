@@ -55,6 +55,7 @@ const Home: React.FC = () => {
   }, []);
 
   const settings = {
+    dots: true,
     infinite: shows.length > 1,
     speed: 500,
     slidesToShow: Math.min(shows.length, 3),

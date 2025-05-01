@@ -6,9 +6,9 @@ import Swal from "sweetalert2";
 export const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>, user: IRegister, signup: any, navigate: NavigateFunction) => {
     try {
         e.preventDefault();
-        const data: string = await signup(user);
+        await signup(user);
         Swal.fire({
-            title: `Has iniciado sesión. Bienvenida/o ${data}`,
+            title: `Te haz registrado con éxito. Te damos la bienvenedia ${user.name}.`,
             width: 600,
             padding: "3em",
             color: "#fff",
@@ -16,9 +16,9 @@ export const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>, user: 
         }).then(() => {
             navigate('/login');
         });
-    } catch (error: any) {
+    } catch (error: any) { 
         return Swal.fire({
-            title: `${error}`,
+            title: `${error.status === 409 ? 'mail ya existente' : error.error}`,
             width: 600,
             padding: "3em",
             color: "#fff",
