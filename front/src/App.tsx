@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
 // src/App.tsx
 import React, { useContext, useEffect, useState } from 'react';
@@ -14,6 +15,15 @@ import RadioMenu from './components/RadioMenu/RadioMenu';
 import { Reviews } from './views/Reseñas/Reviews';
 import logo from "./assets/banner.svg"
 import RadioPlayer from './components/Radio/Radio';
+
+
+const Scroll: React.FC = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname]);
+  return null;
+};
 
 const App: React.FC = () => {
   const { user } = useContext(UserContext);
@@ -55,14 +65,17 @@ const App: React.FC = () => {
 
   const { logOut } = useContext(UserContext)
 
+  
+
   return (
     <div className={`radio-app ${menuExpanded ? 'menu-expanded' : ''} ${
       location.pathname === '/' ? 'home-page' : ''
     }`}>
+      <Scroll />
       <main className="app-content">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/conocenos" element={<Conocenos />} />
+          <Route path="/conocenos" element={<Conocenos /> } />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/donaciones" element={<Donaciones />} />
           <Route path="/reseñas" element={<Reviews />} />

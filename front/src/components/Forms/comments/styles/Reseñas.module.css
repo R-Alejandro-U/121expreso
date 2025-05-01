@@ -20,18 +20,19 @@
 }
 
 .reviewsSection {
-  padding: 40px 20px;
+  padding: 0px 20px 10px;
   text-align: center;
   margin-bottom: 60px;
+  background-color: #000000;
 }
 
 .reviewsGrid {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  align-items: center;
+  gap: 30px;
   margin-bottom: 36px;
   flex-wrap: wrap;
-  align-items: center;
 }
 
 .reviewsGrid > * {
@@ -226,7 +227,7 @@
     }
 
     .reviewsSection {
-        padding: 14px 20px;
+        padding: 0px 20px;
     }
 }
   

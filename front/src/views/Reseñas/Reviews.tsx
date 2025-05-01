@@ -7,7 +7,7 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { CommentsContext } from "../../context/CommentContex";
 import { ReviewCard } from "../../components/Comment/reviewCard";
 import { GetComments } from "../../context/interface/Comment.interface";
-import styles from './ReviewsHome.module.css'
+import styles from '../../components/Forms/comments/styles/Reseñas.module.css'
 
 export const Reviews: React.FC = () => {
   const [newComment, setNewComment] = useState<string>('');
