@@ -25,31 +25,21 @@ const API_URL = 'https://api.mixcloud.com/121expreso/cloudcasts/';
 
 export const getAllShows = async (): Promise<IProgramLite[]> => {
   try {
-    const { data } = await axios.get<MixcloudResponse>(API_URL, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        Accept: 'application/json',
-      },
-    });
-
+    const { data } = await axios.get<MixcloudResponse>(API_URL);
     if (!data.data?.length) {
       throw new Error('No se encontraron shows previos.');
     }
-
     return data.data.map((show: MixcloudShow) => {
       if (!show.name || !show.url || !show.pictures?.['640wx640h'] || !show.audio_length) {
         throw new Error('Datos incompletos en uno de los shows.');
       }
-
       const durationInHours = show.audio_length / 3600;
       const formattedDuration = `${durationInHours.toFixed(1)} horas`;
-
       return {
         title: show.name,
         url: show.url,
         image: show.pictures['640wx640h'],
         duration: formattedDuration,
-        date: 'Fecha no disponible',
       };
     });
   } catch (error) {

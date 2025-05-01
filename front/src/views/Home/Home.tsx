@@ -55,13 +55,12 @@ const Home: React.FC = () => {
   }, []);
 
   const settings = {
-    dots: true,
     infinite: shows.length > 1,
     speed: 500,
     slidesToShow: Math.min(shows.length, 3),
     slidesToScroll: 1,
     autoplay: shows.length > 1,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 5000,
     responsive: [
       {
         breakpoint: 768,
