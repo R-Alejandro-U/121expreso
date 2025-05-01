@@ -2,7 +2,7 @@
   "name": "121expreso",
   "homepage": "https://121expreso.com.ar",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
