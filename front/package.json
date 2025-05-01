@@ -1,5 +1,6 @@
 {
-  "name": "front",
+  "name": "121expreso",
+  "homepage": "https://121expreso.com.ar",
   "private": true,
   "version": "0.0.0",
   "type": "module",
