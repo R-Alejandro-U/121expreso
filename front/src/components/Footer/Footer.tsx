@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
       <div className={styles.secondColumn}>
         <h2 className={styles.titleColumnTwo}>Contacta con nosotros</h2>
         <div className={styles.socialLogo}>
-          <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
+          <a href="https://wa.me/+54 9 11 5259-7989" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
             <FaWhatsapp />
           </a>
           <a href="https://instagram.com/121expreso" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
