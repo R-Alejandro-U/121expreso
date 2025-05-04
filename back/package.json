@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon",
-    "start": "tsc && node ./dist/index.js",
+    "start": "tsc && node ./dist/src/index.js",
     "format": "prettier --write ."
   },
   "repository": {
