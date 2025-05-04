@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 app.use(routes);
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: VercelRequest, res: VercelResponse): Promise<any> {
   try {
     !typeorm.isInitialized ? await typeorm.initialize() : null;
     console.log('Database connection established.');
