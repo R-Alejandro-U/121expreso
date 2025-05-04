@@ -46,72 +46,54 @@ import { join } from 'path';
 import { authorization } from '../middlewares/authorization.middleware';
 
 const routes: Router = Router();
-
-const removeExtension = (file: string): string =>
-  file.split('.').shift() ?? '';
-
+const removeExtension = (file: string): string => file.split('.').shift() ?? '';
 const loadRoutes = async (): Promise<void> => {
-  console.log('Starting to load routes...');
-  // En Vercel, apuntar a dist/src/Routes/
-  const routesDir = process.env['NODE_ENV'] === 'production' ? join(__dirname) : __dirname;
-  console.log('Routes directory:', routesDir);
-
+  const routesDir: string = process.env['NODE_ENV'] === 'production' ? join(__dirname) : __dirname;
   try {
     const files: string[] = await fs.readdir(routesDir);
-    console.log('Files found in Routes directory:', files);
-
     for (const file of files) {
-      // Solo procesar archivos .js en producción, .ts en desarrollo
-      const validExtension = process.env['NODE_ENV']  === 'production' ? file.endsWith('.js') : file.endsWith('.ts');
+      const validExtension: boolean = process.env['NODE_ENV']  === 'production' ? file.endsWith('.js') : file.endsWith('.ts');
       if (
         validExtension &&
         !file.includes('index.') &&
         !file.endsWith('.js.map') &&
         file.includes('.routes.')
       ) {
-        console.log(`Processing route file: ${file}`);
         try {
           const name: string = removeExtension(file).replace('.routes', '');
-          const filePath = join(routesDir, file);
-          console.log(`Attempting to import: ${filePath}`);
+          const filePath: string = join(routesDir, file);
           const path = await import(filePath);
           if (!path.default) {
             console.warn(`No default export found in ${file}`);
             continue;
           }
           if (name === 'users') {
-            console.log(`Mounting /${name} with authorization middleware`);
             routes.use(`/${name}`, authorization, path.default);
           } else {
-            console.log(`Mounting /${name}`);
             routes.use(`/${name}`, path.default);
-          }
+          };
         } catch (err) {
           const error: string = err instanceof Error ? err.message : 'Unknown error';
-          console.error(`Failed to load route ${file}: ${error}`);
           throw new Error(`Error mounting route ${file}: ${error}`);
-        }
-      } else {
-        console.log(`Skipping file: ${file}`);
-      }
+        };
+      }; 
     }
     if (files.length === 0) {
       console.warn('No route files found in Routes directory');
-    }
+    };
   } catch (error) {
     const errorMsg: string = error instanceof Error ? error.message : 'Unknown error';
-    console.error(`Error loading routes: ${errorMsg}`);
     throw new Error(`Error loading routes: ${errorMsg}`);
-  }
+  };
 };
 
-(async () => {
+(async (): Promise<void> => {
   try {
     await loadRoutes();
   } catch (error) {
     console.error('Failed to initialize routes:', error);
     process.exit(1);
-  }
+  };
 })();
 
 export default routes;
