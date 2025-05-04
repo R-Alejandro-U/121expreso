@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import express, { Express } from 'express';
 import morgan from 'morgan';
@@ -21,9 +22,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         await Seeder();
         console.log('Database seeded successfully.');
         isSeeded = true;
-      } catch (err) {
+      } catch (err: any) {
         console.error('Seeder failed:', err);
-        res.status(500).json({ error: 'Seeder failed' });
+        res.status(500).json({ error: err['message'] || err });
         return;
       };
     };
