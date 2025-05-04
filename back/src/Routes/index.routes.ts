@@ -1,61 +1,29 @@
-// import { Router } from 'express';
-// import { promises as fs } from 'fs';
-// import { join } from 'path';
-// import { authorization } from '../middlewares/authorization.middleware';
-
-// const routes: Router = Router();
-// const removeExtension = (file: string): string =>
-//   file.split('.').shift() ?? '';
-// const loadRoutes = async (): Promise<void> => {
-//   console.log('Estoy afuera de la  función');
-//   try {
-//     console.log('no obtuve los archivos')
-//     const files: string[] = await fs.readdir(__dirname);
-//     console.log('obtuve los archivos', files)
-//     for (const file of files) {
-//       if (file !== 'index.routes.js' && file !== 'index.routes.ts') {
-//         try {
-//           console.log('estoy en la ruta', file);
-//           const name: string = removeExtension(file);
-//           const path = await import(join(__dirname, file));
-//           if(name === 'users') {
-//             routes.use(`/${name}`, authorization, path.default) 
-//             continue;
-//           };
-//           routes.use(`/${name}`, path.default);
-//           console.log('se cargo la ruta', file);
-//         } catch (err) {
-//           const error: string = err instanceof Error ? err.message : 'Error desconocido';
-//           throw new Error(`Error al montar una ruta. Error: ${error}`);
-//         };
-//       };
-//     };
-//   } catch (error) {
-//     throw new Error(
-//       `Lo lamentamos ocurrio un error al montar una ruta: ${error instanceof Error ? error.message : 'error desconocido.'}`,
-//     );
-//   };
-// };
-// (async () => await loadRoutes())();
-// export default routes;
-
-
 import { Router } from 'express';
 import { promises as fs } from 'fs';
 import { join } from 'path';
 import { authorization } from '../middlewares/authorization.middleware';
 
 const routes: Router = Router();
+
 const removeExtension = (file: string): string => file.split('.').shift() ?? '';
+
 const loadRoutes = async (): Promise<void> => {
-  console.log('hola desde la carga de rutas');
+  console.log('Cargando rutas...');
   
   const routesDir: string = process.env['NODE_ENV'] === 'production' ? join(__dirname) : __dirname;
+  console.log('Directorio de rutas:', routesDir);
+
   try {
     const files: string[] = await fs.readdir(routesDir);
-    console.log(files);
+    console.log('Archivos encontrados:', files);
+
+    if (files.length === 0) {
+      console.warn('No se encontraron archivos de rutas en el directorio');
+      return;
+    }
+
     for (const file of files) {
-      const validExtension: boolean = process.env['NODE_ENV']  === 'production' ? file.endsWith('.js') : file.endsWith('.ts');
+      const validExtension: boolean = process.env['NODE_ENV'] === 'production' ? file.endsWith('.js') : file.endsWith('.ts');
       if (
         validExtension &&
         !file.includes('index.') &&
@@ -63,46 +31,46 @@ const loadRoutes = async (): Promise<void> => {
         file.includes('.routes.')
       ) {
         try {
-          console.log(file);
-          
+          console.log('Procesando archivo:', file);
           const name: string = removeExtension(file);
-          console.log(name);
+          console.log('Nombre de la ruta:', name);
           const filePath: string = join(routesDir, file);
+          console.log('Ruta del archivo:', filePath);
+
           const path = await import(filePath);
-          console.log(name);
-          
           if (!path.default) {
-            console.warn(`No default export found in ${file}`);
+            console.warn(`No se encontró exportación por defecto en ${file}`);
             continue;
           }
+
           if (name === 'users') {
+            console.log(`Montando ruta /${name} con middleware de autorización`);
             routes.use(`/${name}`, authorization, path.default);
           } else {
+            console.log(`Montando ruta /${name}`);
             routes.use(`/${name}`, path.default);
-          };
+          }
         } catch (err) {
-          const error: string = err instanceof Error ? err.message : 'Unknown error';
-          throw new Error(`Error mounting route ${file}: ${error}`);
-        };
-      }; 
+          const error: string = err instanceof Error ? err.message : 'Error desconocido';
+          console.error(`Error al montar la ruta ${file}: ${error}`);
+        }
+      }
     }
-    if (files.length === 0) {
-      console.warn('No route files found in Routes directory');
-    };
   } catch (error) {
-    const errorMsg: string = error instanceof Error ? error.message : 'Unknown error';
-    throw new Error(`Error loading routes: ${errorMsg}`);
-  };
+    const errorMsg: string = error instanceof Error ? error.message : 'Error desconocido';
+    console.error(`Error al cargar rutas: ${errorMsg}`);
+    throw new Error(`Error al cargar rutas: ${errorMsg}`);
+  }
 };
 
 (async (): Promise<void> => {
   try {
-    console.log('helloda')
+    console.log('Inicializando rutas...');
     await loadRoutes();
   } catch (error) {
-    console.error('Failed to initialize routes:', error);
+    console.error('Fallo al inicializar rutas:', error);
     process.exit(1);
-  };
+  }
 })();
 
 export default routes;
