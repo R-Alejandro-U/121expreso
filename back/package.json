@@ -38,6 +38,7 @@
     "typescript-eslint": "^8.28.0"
   },
   "dependencies": {
+    "@vercel/node": "^ 4.0.0",
     "axios": "^1.8.4",
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
