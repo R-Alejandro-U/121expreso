@@ -2,8 +2,10 @@
   "name": "back_121",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "dev": "nodemon",
+    "build": "tsc",
     "start": "tsc && node ./dist/src/index.js",
     "format": "prettier --write ."
   },
