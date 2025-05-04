@@ -48,6 +48,8 @@ import { authorization } from '../middlewares/authorization.middleware';
 const routes: Router = Router();
 const removeExtension = (file: string): string => file.split('.').shift() ?? '';
 const loadRoutes = async (): Promise<void> => {
+  console.log('hola desde la carga de rutas');
+  
   const routesDir: string = process.env['NODE_ENV'] === 'production' ? join(__dirname) : __dirname;
   try {
     const files: string[] = await fs.readdir(routesDir);
