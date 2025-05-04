@@ -63,10 +63,14 @@ const loadRoutes = async (): Promise<void> => {
         file.includes('.routes.')
       ) {
         try {
+          console.log(file);
+          
           const name: string = removeExtension(file);
           console.log(name);
           const filePath: string = join(routesDir, file);
           const path = await import(filePath);
+          console.log(name);
+          
           if (!path.default) {
             console.warn(`No default export found in ${file}`);
             continue;

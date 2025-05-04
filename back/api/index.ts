@@ -17,7 +17,7 @@ app.use(routes);
 export default async function handler(req: VercelRequest, res: VercelResponse): Promise<any> {
   try {
     !typeorm.isInitialized ? await typeorm.initialize() : null;
-    console.log(routes)
+    console.log('esta en produccion?', process.env['NODE_ENV']  === 'production')
     console.log('Database connection established.');
     await Seeder();
     console.log('Database seeded successfully.');
