@@ -16,26 +16,26 @@ app.use(express.json());
 app.use(routes);
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  if (!typeorm.isInitialized) {
-    if (!isSeeded) {
-      try {
-        await Seeder();
-        console.log('Database seeded successfully.');
-        isSeeded = true;
-      } catch (err: any) {
-        console.error('Seeder failed:', err);
-        res.status(500).json({ error: err['message'] || err });
-        return;
+  try {
+    await typeorm.initialize();
+    console.log('Database connection established.');
+    if (!typeorm.isInitialized) {
+      if (!isSeeded) {
+        try {
+          await Seeder();
+          console.log('Database seeded successfully.');
+          isSeeded = true;
+        } catch (err: any) {
+          console.error('Seeder failed:', err);
+          res.status(500).json({ error: err['message'] || err });
+          return;
+        };
       };
     };
-    try {
-      await typeorm.initialize();
-      console.log('Database connection established.');
-    } catch (err) {
-      console.error('Database connection failed:', err);
-      res.status(500).json({ error: 'Database connection failed' });
-      return;
-    };
+  } catch (err) {
+    console.error('Database connection failed:', err);
+    res.status(500).json({ error: 'Database connection failed' });
+    return;
   };
   return app(req, res);
 };
