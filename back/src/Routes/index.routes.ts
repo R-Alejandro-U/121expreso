@@ -93,6 +93,7 @@ const loadRoutes = async (): Promise<void> => {
 
 (async (): Promise<void> => {
   try {
+    console.log('helloda')
     await loadRoutes();
   } catch (error) {
     console.error('Failed to initialize routes:', error);
