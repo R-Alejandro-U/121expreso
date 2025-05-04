@@ -51,6 +51,7 @@ const loadRoutes = async (): Promise<void> => {
   const routesDir: string = process.env['NODE_ENV'] === 'production' ? join(__dirname) : __dirname;
   try {
     const files: string[] = await fs.readdir(routesDir);
+    console.log(files);
     for (const file of files) {
       const validExtension: boolean = process.env['NODE_ENV']  === 'production' ? file.endsWith('.js') : file.endsWith('.ts');
       if (
@@ -60,7 +61,8 @@ const loadRoutes = async (): Promise<void> => {
         file.includes('.routes.')
       ) {
         try {
-          const name: string = removeExtension(file).replace('.routes', '');
+          const name: string = removeExtension(file);
+          console.log(name);
           const filePath: string = join(routesDir, file);
           const path = await import(filePath);
           if (!path.default) {
