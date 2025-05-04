@@ -16,8 +16,9 @@ app.use(routes);
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     !typeorm.isInitialized ? await typeorm.initialize() : null;
-    await Seeder();
     console.log('Database connection established.');
+    await Seeder();
+    console.log('Database seeded successfully.');
   } catch (err: any) {
     console.error('Database connection failed:', err);
     res.status(500).json({ error: 'Database connection failed' + err['message'] || err });
