@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
           <a href="https://x.com/121expreso" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
             <FaXTwitter />
           </a>
-          <a href="https://play.google.com/store/apps/details?id=com.expreso121.ecoargentinaapps" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
+          <a href="https://play.google.com/store/apps/details?id=com.zodiaclogic.Expreso" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
             <FaGooglePlay />
           </a>
         </div>
