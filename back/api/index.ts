@@ -19,9 +19,6 @@ app.use('/api/auth', route_auth);
 app.use('/api/comment', route_comment);
 app.use('/api/radio', route_radio);
 app.use('/api/shows', route_shows);
-app.get('/api/test', (req, res) => {
-  res.json({ message: 'Servidor funcionando correctamente' });
-});
 export default async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
   try {
     if (!typeorm.isInitialized) {
@@ -35,6 +32,5 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
     res.status(500).json({ error: 'Database connection failed: ' + err.message });
     return;
   }
-  console.log('Handling request:', req.method, req.url); // Log para depurar solicitudes
   return app(req, res);
 }
