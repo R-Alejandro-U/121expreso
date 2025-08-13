@@ -6,7 +6,7 @@ const RadioPlayer: React.FC = () => {
 
     const audioRef: React.RefObject<HTMLAudioElement | null> = useRef<HTMLAudioElement>(null);
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
-    const radioUrl: string = "https://one21expreso.onrender.com/radio";
+    const radioUrl: string = "https://121expreso.vercel.app/api/radio";
 
     const toglePlay = (): void => {
         if(audioRef.current){

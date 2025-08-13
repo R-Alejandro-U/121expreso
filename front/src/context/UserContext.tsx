@@ -23,7 +23,7 @@ export const UserProvider = ({children}: {children: React.ReactNode}) => {
     });
     const signup = async (newUser: IRegister): Promise<string> => {
         try {
-            const { data } = await axios.post<ISignUpResponse>('https://one21expreso.onrender.com/auth/signup', newUser);
+            const { data } = await axios.post<ISignUpResponse>('https://121expreso.vercel.app/api/auth/signup', newUser);
             return data.message; 
         } catch ({ response }: any) {
             throw response.data;
@@ -31,7 +31,7 @@ export const UserProvider = ({children}: {children: React.ReactNode}) => {
     };
     const loginUser = async (LoginUser: DataLogin): Promise<IUser> => {
         try {
-            const { data } = await axios.post<ILoginResponse>('https://one21expreso.onrender.com/auth/signin', LoginUser)
+            const { data } = await axios.post<ILoginResponse>('https://121expreso.vercel.app/api/auth/signin', LoginUser)
             localStorage.setItem("user", JSON.stringify(data.user));
             localStorage.setItem("token", data.token);
             setUser({user: data.user.id})

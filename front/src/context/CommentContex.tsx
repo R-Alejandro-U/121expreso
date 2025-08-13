@@ -20,7 +20,7 @@ export const ReviewsProvider = ({children}: {children: React.ReactNode}) => {
     const [ reviews, setReviews ] = useState<GetComments[] | undefined>();
     const postReview = async (comment: string, token: string) => {
         try {
-            const { data } = await axios.post<comment>('https://one21expreso.onrender.com/comment', {comment}, {
+            const { data } = await axios.post<comment>('https://121expreso.vercel.app/api/comment', {comment}, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
@@ -33,7 +33,7 @@ export const ReviewsProvider = ({children}: {children: React.ReactNode}) => {
     };
     const getComments = useCallback(async (): Promise<GetComments[]> => {
         try {
-            const { data } = await axios<GetCommentsRes>('https://one21expreso.onrender.com/comment');
+            const { data } = await axios<GetCommentsRes>('https://121expreso.vercel.app/api/comment');
             const comments: GetComments[] = data.data.comments.map((comment: Comments) => ({...comment, CreateComment: new Date(comment.CreateComment)}));
             setReviews(comments);
             return comments;
