@@ -5,7 +5,7 @@ import server from './server';
 import 'reflect-metadata';
 
 typeorm.initialize()
-.then(() => Seeder()
+.then(() => Seeder() 
   .then((): void => {
     console.log('connection sucessfull.');
     server.listen(PORT, () =>
