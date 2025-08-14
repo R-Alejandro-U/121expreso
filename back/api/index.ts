@@ -10,6 +10,9 @@ import  route_comment from '../src/Routes/comment.routes'
 import  route_auth from '../src/Routes/auth.routes'
 import  route_radio from '../src/Routes/radio.routes'
 import  route_shows from '../src/Routes/shows.routes'
+import { injectSpeedInsights } from '@vercel/speed-insights';
+
+injectSpeedInsights();
 const app: Express = express();
 app.use(morgan('dev'));
 app.use(cors());
@@ -19,6 +22,7 @@ app.use('/api/auth', route_auth);
 app.use('/api/comment', route_comment);
 app.use('/api/radio', route_radio);
 app.use('/api/shows', route_shows);
+
 export default async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
   try {
     if (!typeorm.isInitialized) {
