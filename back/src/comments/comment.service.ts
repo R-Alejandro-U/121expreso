@@ -33,7 +33,7 @@ export const commentService = {
         try {
             const comment: Comment | null = await commentModel.findOneBy({ id });
             if (!comment) throw new Error('No se encontró el mensaje.');
-            await commentModel.delete(comment);
+            await commentModel.remove(comment);
             return 'Se eliminó el comentario exitosamente.';
         } catch (error) {
             throw error;
