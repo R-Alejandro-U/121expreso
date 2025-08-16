@@ -16,7 +16,6 @@ export const commentService = {
             .limit(limit)
             .leftJoinAndSelect('comment.user', 'user')
             .getMany();
-            console.log(comments);
             const partialComments: CommentDTO[] = comments.map((comment: Comment): CommentDTO => {
                 const { UpDateComment, user, ...partialComment } = comment;
                 const { name } = user;
